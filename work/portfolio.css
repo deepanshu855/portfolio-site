@@ -15,14 +15,14 @@
 }
 
 .lightTheme {
-  --ink: #f2f5f2;
-  --surface: #fbfcfa;
-  --surface-raised: #e8eeeb;
-  --line: rgba(19, 37, 32, .15);
-  --text: #17211e;
-  --muted: #56635e;
-  --accent: #087e73;
-  --accent-blue: #475cb1;
+  --ink: #e8ede9;
+  --surface: #f5f7f4;
+  --surface-raised: #e1e8e3;
+  --line: rgba(17, 34, 27, .2);
+  --text: #101814;
+  --muted: #35433c;
+  --accent: #006b60;
+  --accent-blue: #38478f;
 }
 
 .lightTheme .nav, .lightTheme .signalStrip, .lightTheme .achievementRow {
@@ -153,6 +153,71 @@
   pointer-events: none;
   opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+}
+
+.backgroundGrid {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+}
+
+.backgroundGrid > span {
+  position: absolute;
+  display: block;
+  background-image: linear-gradient(rgba(136, 240, 220, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 240, 220, 0.22) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 139px, rgba(136, 240, 220, 0.25) 139px 140px), repeating-linear-gradient(90deg, transparent 0 139px, rgba(136, 240, 220, 0.25) 139px 140px);
+  background-size: 34px 34px, 34px 34px, 140px 140px, 140px 140px;
+  opacity: 0.82;
+  mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 45%, transparent 82%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.9) 45%, transparent 82%);
+}
+
+.backgroundGrid > span::after {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(65, 177, 168, 0.14), transparent 72%);
+  content: "";
+}
+
+.gridPatchOne {
+  top: 1%;
+  right: -9%;
+  width: min(47vw, 680px);
+  height: 590px;
+}
+
+.gridPatchTwo {
+  top: 24%;
+  left: -12%;
+  width: min(39vw, 570px);
+  height: 640px;
+}
+
+.gridPatchThree {
+  top: 48%;
+  right: -7%;
+  width: min(43vw, 620px);
+  height: 670px;
+}
+
+.gridPatchFour {
+  top: 72%;
+  left: 12%;
+  width: min(33vw, 480px);
+  height: 520px;
+}
+
+.gridPatchFive {
+  right: -1%;
+  bottom: 1%;
+  width: min(42vw, 600px);
+  height: 610px;
+}
+
+.site > main, .site > .footer {
+  position: relative;
+  z-index: 1;
 }
 
 .cursor {
@@ -288,6 +353,10 @@
   transition: color 0.2s ease;
 }
 
+.nav nav a {
+  white-space: nowrap;
+}
+
 .nav nav a:hover, .navContact:hover {
   color: var(--accent);
 }
@@ -326,13 +395,34 @@
   padding: 64px 0 94px;
 }
 
+.hero::after {
+  position: absolute;
+  z-index: 0;
+  top: 24%;
+  left: 39%;
+  width: min(35vw, 470px);
+  height: 63%;
+  background-image: linear-gradient(rgba(136, 240, 220, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 240, 220, 0.18) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(136, 240, 220, 0.28) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(136, 240, 220, 0.28) 111px 112px);
+  background-size: 28px 28px, 28px 28px, 112px 112px, 112px 112px;
+  opacity: 0.72;
+  content: "";
+  mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.88) 38%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.88) 38%, transparent 78%);
+  pointer-events: none;
+}
+
+.lightTheme .hero::after {
+  background-image: linear-gradient(rgba(17, 65, 54, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 65, 54, 0.3) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px);
+  opacity: 0.9;
+}
+
 .heroCopy {
   position: relative;
   z-index: 2;
   padding: 16px 0 0 4.6%;
 }
 
-.eyebrow, .heroKicker, .sectionLabel, .sectionAside, .heroIndex, .skillIndex, .eduIndex, .cgpa > span, .achievementRow > div > span, .portraitLabel, .coordinate, .visualCaption > span, .scrollCue, .projectMeta > span, .artTop, .modalImageNote, .modalContent > h3, .footer > span {
+.eyebrow, .heroKicker, .sectionLabel, .sectionAside, .heroIndex, .skillIndex, .eduIndex, .cgpa > span, .achievementRow > div > span, .coordinate, .visualCaption > span, .scrollCue, .projectMeta > span, .artTop, .modalImageNote, .modalContent > h3, .footer > span {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
@@ -476,6 +566,7 @@
 
 .heroVisual {
   position: relative;
+  z-index: 1;
   min-height: 560px;
   height: 100%;
   overflow: hidden;
@@ -529,40 +620,6 @@
   inset: 0;
   border-color: rgba(152, 168, 255, 0.2);
   transform: rotateX(72deg) rotateZ(48deg);
-}
-
-.portraitFrame {
-  position: absolute;
-  z-index: 1;
-  top: 24%;
-  right: 11%;
-  width: min(36%, 252px);
-  height: 51%;
-  min-height: 292px;
-  overflow: hidden;
-  border: 1px solid rgba(223, 237, 236, 0.28);
-  background: #c3c4c4;
-  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.38);
-  transform: rotate(2.3deg);
-}
-
-.portrait {
-  object-fit: cover;
-  object-position: 50% 68%;
-  filter: saturate(0.72) contrast(1.03);
-  transform: scale(1.04);
-}
-
-.portraitLabel {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 9px;
-  background: rgba(8, 10, 11, 0.76);
-  color: #dce5e3;
-  font-size: 7px;
-  letter-spacing: 0.11em;
 }
 
 .coordinate {
@@ -653,6 +710,32 @@
   margin: 0 auto;
   padding: 137px 0 45px;
   scroll-margin-top: 40px;
+}
+
+.workSection {
+  position: relative;
+  isolation: isolate;
+}
+
+.workSection::before {
+  position: absolute;
+  z-index: -1;
+  top: -38px;
+  right: 12vw;
+  width: min(53vw, 710px);
+  height: 430px;
+  background-image: linear-gradient(rgba(136, 240, 220, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 240, 220, 0.2) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(136, 240, 220, 0.3) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(136, 240, 220, 0.3) 111px 112px), radial-gradient(ellipse at 58% 42%, rgba(57, 170, 158, 0.12), transparent 70%);
+  background-size: 28px 28px, 28px 28px, 112px 112px, 112px 112px, auto;
+  opacity: 0.72;
+  content: "";
+  mask-image: radial-gradient(ellipse at 62% 42%, #000 0%, rgba(0, 0, 0, 0.88) 36%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at 62% 42%, #000 0%, rgba(0, 0, 0, 0.88) 36%, transparent 78%);
+  pointer-events: none;
+}
+
+.lightTheme .workSection::before {
+  background-image: linear-gradient(rgba(17, 65, 54, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 65, 54, 0.3) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), radial-gradient(ellipse at 58% 42%, rgba(0, 107, 96, 0.12), transparent 70%);
+  opacity: 0.9;
 }
 
 .sectionHeading {
@@ -1285,7 +1368,30 @@
 }
 
 .capabilitiesSection {
+  position: relative;
+  isolation: isolate;
   padding-top: 135px;
+}
+
+.capabilitiesSection::before {
+  position: absolute;
+  z-index: -1;
+  top: -35px;
+  right: -7vw;
+  width: min(54vw, 720px);
+  height: 470px;
+  background-image: linear-gradient(rgba(136, 240, 220, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 240, 220, 0.2) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(136, 240, 220, 0.3) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(136, 240, 220, 0.3) 111px 112px), radial-gradient(ellipse at 58% 42%, rgba(57, 170, 158, 0.12), transparent 70%);
+  background-size: 28px 28px, 28px 28px, 112px 112px, 112px 112px, auto;
+  opacity: 0.72;
+  content: "";
+  mask-image: radial-gradient(ellipse at 62% 42%, #000 0%, rgba(0, 0, 0, 0.88) 36%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at 62% 42%, #000 0%, rgba(0, 0, 0, 0.88) 36%, transparent 78%);
+  pointer-events: none;
+}
+
+.lightTheme .capabilitiesSection::before {
+  background-image: linear-gradient(rgba(17, 65, 54, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 65, 54, 0.3) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), radial-gradient(ellipse at 58% 42%, rgba(0, 107, 96, 0.12), transparent 70%);
+  opacity: 0.9;
 }
 
 .skillGrid {
@@ -1386,7 +1492,30 @@
 }
 
 .backgroundSection {
+  position: relative;
+  isolation: isolate;
   padding-top: 135px;
+}
+
+.backgroundSection::before {
+  position: absolute;
+  z-index: -1;
+  top: 35px;
+  left: 38%;
+  width: min(36vw, 500px);
+  height: 420px;
+  background-image: linear-gradient(rgba(136, 240, 220, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(136, 240, 220, 0.2) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(136, 240, 220, 0.3) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(136, 240, 220, 0.3) 111px 112px), radial-gradient(ellipse at 55% 45%, rgba(57, 170, 158, 0.12), transparent 70%);
+  background-size: 28px 28px, 28px 28px, 112px 112px, 112px 112px, auto;
+  opacity: 0.74;
+  content: "";
+  mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.88) 38%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, rgba(0, 0, 0, 0.88) 38%, transparent 78%);
+  pointer-events: none;
+}
+
+.lightTheme .backgroundSection::before {
+  background-image: linear-gradient(rgba(17, 65, 54, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 65, 54, 0.3) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), repeating-linear-gradient(90deg, transparent 0 111px, rgba(17, 65, 54, 0.38) 111px 112px), radial-gradient(ellipse at 55% 45%, rgba(0, 107, 96, 0.12), transparent 70%);
+  opacity: 0.9;
 }
 
 .educationCard {
@@ -1545,16 +1674,6 @@
   inset: 58px;
 }
 
-.contactOrbit span {
-  position: absolute;
-  top: 0;
-  color: rgba(136, 240, 220, 0.5);
-  font: 7px "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  letter-spacing: 0.23em;
-  white-space: nowrap;
-  transform: rotate(-15deg);
-}
-
 .contactSection > *:not(.contactOrbit) {
   position: relative;
   z-index: 1;
@@ -1562,6 +1681,12 @@
 
 .contactSection .sectionLabel {
   margin-bottom: 23px;
+}
+
+.contactSection > .sectionLabel {
+  align-self: flex-start;
+  margin-left: max((100% - 1320px) / 2 - 24px, 0px);
+  text-align: left;
 }
 
 .contactSection h2 {
@@ -1804,13 +1929,6 @@
   .heroVisual {
     min-height: 490px;
   }
-  .portraitFrame {
-    top: 26%;
-    right: 8%;
-    width: 42%;
-    height: 45%;
-    min-height: 250px;
-  }
   .coordinate {
     left: 1%;
   }
@@ -1847,6 +1965,13 @@
     grid-template-columns: 1fr;
     align-content: start;
     padding: 55px 0 64px;
+  }
+  .hero::after {
+    top: 31%;
+    left: 30%;
+    width: 74%;
+    height: 42%;
+    opacity: 0.48;
   }
   .heroCopy {
     padding: 0;
@@ -1902,16 +2027,6 @@
     right: 4%;
     width: 78%;
   }
-  .portraitFrame {
-    top: 14%;
-    right: 20%;
-    width: 42%;
-    height: 70%;
-    min-height: 218px;
-  }
-  .portrait {
-    object-position: 50% 100%;
-  }
   .coordinate, .visualCaption, .visualCross {
     display: none;
   }
@@ -1943,6 +2058,20 @@
     max-width: 340px;
     margin: 18px 0 0;
     font-size: 9px;
+  }
+  .workSection::before {
+    top: -25px;
+    right: 0;
+    width: 96vw;
+    height: 370px;
+    opacity: 0.56;
+  }
+  .capabilitiesSection::before {
+    top: -28px;
+    right: -21vw;
+    width: 96vw;
+    height: 390px;
+    opacity: 0.55;
   }
   .projectGrid {
     grid-template-columns: 1fr;
@@ -2013,6 +2142,13 @@
     min-height: 174px;
     padding: 20px 14px;
   }
+  .backgroundSection::before {
+    top: 68px;
+    left: 31%;
+    width: 76vw;
+    height: 340px;
+    opacity: 0.48;
+  }
   .eduIndex {
     font-size: 6px;
   }
@@ -2068,6 +2204,9 @@
     min-height: 440px;
     margin-top: 90px;
     padding: 70px 18px;
+  }
+  .contactSection > .sectionLabel {
+    margin-left: 0;
   }
   .contactOrbit {
     width: 300px;
@@ -2145,8 +2284,8 @@
 }
 
 .lightTheme {
-  --text-soft: #35423d;
-  --text-dim: #4b5b54;
+  --text-soft: #202d27;
+  --text-dim: #35433c;
   --chip-bg: #e2e9e5;
   --chip-text: #17211e;
 }
@@ -2206,11 +2345,20 @@
   position: sticky;
   top: clamp(82px, 10vh, 112px);
   z-index: calc(10 + var(--project-index, 0));
+  rotate: -2deg;
+  translate: -42px 0;
+  transform-origin: 50% 14%;
   display: grid;
   grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
   align-items: stretch;
   border-color: var(--line);
   background: var(--surface);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
+}
+
+.projectCard:nth-child(even) {
+  rotate: 1.8deg;
+  translate: 42px 0;
 }
 
 .projectCard:nth-child(even) {
@@ -2414,13 +2562,13 @@
 }
 
 .lightTheme .orbWrap {
-  opacity: 0.94;
+  opacity: 0.7;
   mix-blend-mode: multiply;
 }
 
 .lightTheme .visualGrid {
-  opacity: 0.42;
-  background-image: linear-gradient(rgba(21, 58, 51, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(21, 58, 51, 0.12) 1px, transparent 1px);
+  opacity: 0.58;
+  background-image: linear-gradient(rgba(17, 65, 54, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 65, 54, 0.2) 1px, transparent 1px);
 }
 
 .lightTheme .coordinate {
@@ -2443,6 +2591,15 @@
 
 .lightTheme .orbFallback::after {
   border-color: rgba(71, 92, 177, 0.3);
+}
+
+.lightTheme .backgroundGrid > span {
+  background-image: linear-gradient(rgba(17, 65, 54, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 65, 54, 0.3) 1px, transparent 1px), repeating-linear-gradient(0deg, transparent 0 139px, rgba(17, 65, 54, 0.38) 139px 140px), repeating-linear-gradient(90deg, transparent 0 139px, rgba(17, 65, 54, 0.38) 139px 140px);
+  opacity: 0.9;
+}
+
+.lightTheme .backgroundGrid > span::after {
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 107, 96, 0.13), transparent 72%);
 }
 
 .lightTheme .nav nav a, .lightTheme .navContact, .lightTheme .roleLine,
@@ -2519,6 +2676,12 @@
   .projectCard, .projectCard:nth-child(even) {
     display: flex;
     flex-direction: column;
+    rotate: -1deg;
+    translate: -8px 0;
+  }
+  .projectCard:nth-child(even) {
+    rotate: 0.9deg;
+    translate: 8px 0;
   }
   .projectCard {
     top: 73px;
@@ -2581,6 +2744,35 @@
   }
   .heroDescription {
     font-size: 14px;
+  }
+  .backgroundGrid > span {
+    background-size: 29px 29px, 29px 29px, 140px 140px, 140px 140px;
+    opacity: 0.68;
+  }
+  .gridPatchOne {
+    right: -30%;
+    width: 88vw;
+    height: 430px;
+  }
+  .gridPatchTwo {
+    left: -38%;
+    width: 76vw;
+    height: 480px;
+  }
+  .gridPatchThree {
+    right: -34%;
+    width: 82vw;
+    height: 500px;
+  }
+  .gridPatchFour {
+    left: -21%;
+    width: 74vw;
+    height: 400px;
+  }
+  .gridPatchFive {
+    right: -32%;
+    width: 83vw;
+    height: 450px;
   }
   .achievementRow small {
     font-size: 12px;

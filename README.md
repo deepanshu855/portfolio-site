@@ -10,7 +10,7 @@ Requires Node.js 20.9 or newer.
 2. Run `npm install`.
 3. Run `npm run dev` and open `http://localhost:3000`.
 
-Before deployment, set `NEXT_PUBLIC_SITE_URL` to the final public origin. The résumé is served from `public/resume.pdf`; the profile photo is `public/images/deepanshu-profile.jpg`.
+Before deployment, set `NEXT_PUBLIC_SITE_URL` to the final public origin. The résumé is served from `public/resume.pdf`.
 
 ## Portfolio assistant
 

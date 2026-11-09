@@ -38,10 +38,10 @@ function SignalOrb({ lightTheme }: { lightTheme: boolean }) {
         float bands = 0.5 + 0.5 * sin(vUv.y * 95.0 + uTime * 0.55 + uPointer.x * 1.8);
         float latitude = smoothstep(0.87, 1.0, bands);
         float glow = rim * 0.42 + latitude * 0.24;
-        vec3 deep = ${lightTheme ? "vec3(0.015, 0.25, 0.23)" : "vec3(0.025, 0.12, 0.16)"};
-        vec3 mint = ${lightTheme ? "vec3(0.0, 0.58, 0.49)" : "vec3(0.43, 0.95, 0.83)"};
+        vec3 deep = ${lightTheme ? "vec3(0.015, 0.12, 0.11)" : "vec3(0.025, 0.12, 0.16)"};
+        vec3 mint = ${lightTheme ? "vec3(0.02, 0.29, 0.25)" : "vec3(0.43, 0.95, 0.83)"};
         vec3 color = mix(deep, mint, clamp(glow * 1.9, 0.0, 1.0));
-        float alpha = ${lightTheme ? "0.18 + glow * 0.82" : "0.12 + glow * 0.72"};
+        float alpha = ${lightTheme ? "0.07 + glow * 0.38" : "0.12 + glow * 0.72"};
         gl_FragColor = vec4(color, alpha);
         #include <tonemapping_fragment>
         #include <colorspace_fragment>
@@ -68,15 +68,15 @@ function SignalOrb({ lightTheme }: { lightTheme: boolean }) {
       </mesh>
       <mesh scale={1.006}>
         <sphereGeometry args={[1.45, 32, 24]} />
-        <meshBasicMaterial color={lightTheme ? "#087e73" : "#88f0dc"} wireframe transparent opacity={lightTheme ? 0.42 : 0.24} />
+        <meshBasicMaterial color={lightTheme ? "#176b61" : "#88f0dc"} wireframe transparent opacity={lightTheme ? 0.22 : 0.24} />
       </mesh>
       <mesh rotation={[Math.PI / 2.4, 0, -0.28]} scale={[1.02, 1.02, 1.02]}>
         <torusGeometry args={[1.68, 0.006, 6, 180]} />
-        <meshBasicMaterial color={lightTheme ? "#475cb1" : "#9cafff"} transparent opacity={0.78} />
+        <meshBasicMaterial color={lightTheme ? "#596293" : "#9cafff"} transparent opacity={lightTheme ? 0.38 : 0.72} />
       </mesh>
       <mesh rotation={[Math.PI / 2.4, 0, -0.28]} scale={[1.02, 1.02, 1.02]}>
         <torusGeometry args={[1.78, 0.003, 4, 180]} />
-        <meshBasicMaterial color={lightTheme ? "#087e73" : "#88f0dc"} transparent opacity={lightTheme ? 0.54 : 0.38} />
+        <meshBasicMaterial color={lightTheme ? "#176b61" : "#88f0dc"} transparent opacity={lightTheme ? 0.28 : 0.38} />
       </mesh>
     </group>
   );

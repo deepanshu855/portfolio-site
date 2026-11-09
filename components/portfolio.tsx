@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
@@ -201,6 +200,13 @@ export default function Portfolio() {
   return (
     <div id="top" className={`${styles.site} ${lightTheme ? styles.lightTheme : ""}`} data-theme={lightTheme ? "light" : "dark"} style={{ colorScheme: lightTheme ? "light" : "dark" }} ref={root} onClick={handleInPageNavigation}>
       <div className={styles.noise} aria-hidden="true" />
+      <div className={styles.backgroundGrid} aria-hidden="true">
+        <span className={styles.gridPatchOne} />
+        <span className={styles.gridPatchTwo} />
+        <span className={styles.gridPatchThree} />
+        <span className={styles.gridPatchFour} />
+        <span className={styles.gridPatchFive} />
+      </div>
       <Cursor />
       {loading && <div ref={preloader} className={styles.preloader} aria-label="Loading portfolio">
           <span className={styles.preloaderMark}>DS<span>.</span></span>
@@ -211,9 +217,10 @@ export default function Portfolio() {
       <header className={styles.nav}>
         <a href="#top" className={styles.wordmark} aria-label="Deepanshu Sharma home">D<span>/</span>S</a>
         <nav aria-label="Main navigation">
-          <a href="#work">Work <span>01</span></a>
-          <a href="#capabilities">Capabilities <span>02</span></a>
+          <a href="#work">Projects <span>01</span></a>
+          <a href="#capabilities">Skills <span>02</span></a>
           <a href="#background">Background <span>03</span></a>
+          <a href="#contact">Open to what’s next <span>04</span></a>
         </nav>
         <button type="button" className={styles.navContact} onClick={() => setLightTheme((isLight) => !isLight)} aria-label={`Switch to ${lightTheme ? "dark" : "light"} theme`} aria-pressed={lightTheme}>
           <span className={styles.themeIcon} aria-hidden="true">{lightTheme ? "☾" : "☼"}</span>{lightTheme ? "Dark theme" : "Light theme"}
@@ -234,13 +241,9 @@ export default function Portfolio() {
             </div>
             <div className={styles.heroProof}><span>CGPA <strong>9.25</strong> / 10</span><i /><span>SEMESTER TOPPER <strong>× 2</strong></span></div>
           </div>
-          <div className={styles.heroVisual} aria-label="Portrait of Deepanshu Sharma">
+          <div className={styles.heroVisual} aria-label="Decorative 3D signal orb">
             <div className={styles.visualGrid} aria-hidden="true" />
             <div className={styles.orbWrap}>{showScene ? <HeroScene lightTheme={lightTheme} /> : <div className={styles.orbFallback} aria-hidden="true" />}</div>
-            <div className={styles.portraitFrame}>
-              <Image src="/images/deepanshu-profile.jpg" alt="Deepanshu Sharma wearing a white shirt" fill priority sizes="(max-width: 760px) 42vw, 270px" className={styles.portrait} />
-              <span className={styles.portraitLabel}>DEEPANSHU SHARMA · 01</span>
-            </div>
             <div className={styles.coordinate}>FULL-STACK<br />GENERATIVE AI</div>
             <div className={styles.visualCaption}><span>BUILDING AT THE INTERSECTION</span><strong>of systems & feeling</strong></div>
             <div className={styles.visualCross}>+</div>
@@ -314,7 +317,7 @@ export default function Portfolio() {
         </section>
 
         <section id="contact" className={styles.contactSection} aria-labelledby="contact-title">
-          <div className={styles.contactOrbit} aria-hidden="true"><span>LET’S BUILD SOMETHING USEFUL · LET’S BUILD SOMETHING USEFUL · </span></div>
+          <div className={styles.contactOrbit} aria-hidden="true" />
           <p className={styles.sectionLabel}>04 / OPEN TO WHAT’S NEXT</p>
           <h2 id="contact-title">Good work<br />starts with <em>a hello.</em></h2>
           <a className={styles.contactEmail} href={links.email}>deepanshusharma040@gmail.com <span>↗</span></a>
