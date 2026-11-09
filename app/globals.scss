@@ -1,0 +1,28 @@
+@use "./variables" as *;
+
+:root { color-scheme: dark; }
+
+* { box-sizing: border-box; }
+html { background: $ink; scroll-behavior: auto; }
+body {
+  margin: 0;
+  background: $ink;
+  color: $text;
+  font-family: $font-body;
+  -webkit-font-smoothing: antialiased;
+}
+body, button, input, textarea { font-family: $font-body; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { color: inherit; }
+a { color: inherit; text-decoration: none; }
+::selection { background: $accent; color: $ink; }
+:focus-visible { outline: 2px solid $accent; outline-offset: 4px; }
+
+.srOnly {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
