@@ -14,10 +14,10 @@ Before deployment, set `NEXT_PUBLIC_SITE_URL` to the final public origin. The r�
 
 ## Content still to supply
 
-- Landing-page screenshots for the six project cards. Current artwork is a set of CSS mockups and each project modal marks its image as a placeholder.
+- Landing-page screenshots for the five project cards. Current artwork is a set of CSS mockups and each project modal marks its image as a placeholder.
 - Project-specific GitHub repository and live URLs. Cards currently link to the supplied GitHub profile; the résumé has generic GitHub/Live labels for the first three projects, without individual URLs.
 - Confirm the Banão spelling. The project uses the spelling from the main portfolio brief; the résumé rendering appears to spell it “Banāo.”
-- Stack details for Snitch and Food Recipe App. No technologies were supplied for those projects.
+- Stack details for Snitch. No technologies were supplied for the project.
 - A description for K.N.I.T Orchestrator. It was named once in the initial requirements but had no matching project details, so it is not presented as a project.
 
 ## Implementation notes

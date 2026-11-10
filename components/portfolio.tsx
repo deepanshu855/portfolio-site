@@ -1,15 +1,38 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  SiDocker,
+  SiExpress,
+  SiFigma,
+  SiGit,
+  SiGithub,
+  SiJavascript,
+  SiKubernetes,
+  SiLangchain,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostman,
+  SiPython,
+  SiReact,
+  SiRedis,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
 import { links, projects, Project, skillGroups } from "@/lib/portfolio-data";
 import styles from "./portfolio.module.scss";
 import ScrollStack, { ScrollStackItem } from "./scroll-stack";
 import TechText from "./tech-text";
 import FolderFloat from "./folder-float";
+import LogoLoop from "./logo-loop";
 
 type ThemeMode = "system" | "light" | "dark";
 
@@ -24,6 +47,27 @@ const skillMarks: Record<string, { mark: string; color: string }> = {
   Git: { mark: "G", color: "#f05032" }, GitHub: { mark: "GH", color: "#f5f5f5" }, Postman: { mark: "P", color: "#ff6c37" }, Figma: { mark: "◉", color: "#f58b72" }, Warp: { mark: ">_", color: "#d3a8ff" },
   "Data Structures and Algorithms": { mark: "⌘", color: "#f2c76e" }, OOP: { mark: "◫", color: "#f2c76e" }, "System Design Basics": { mark: "SD", color: "#f2c76e" }, "Microservices Architecture": { mark: "μ", color: "#91a5ff" },
 };
+
+const skillLogos = [
+  { node: <SiReact />, title: "React", href: "https://react.dev", hoverColor: "#61dafb" },
+  { node: <SiNextdotjs />, title: "Next.js", href: "https://nextjs.org", hoverColor: "#111111" },
+  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org", hoverColor: "#3178c6" },
+  { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", hoverColor: "#f7df1e" },
+  { node: <SiPython />, title: "Python", href: "https://www.python.org", hoverColor: "#3776ab" },
+  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org", hoverColor: "#5fa04e" },
+  { node: <SiExpress />, title: "Express", href: "https://expressjs.com", hoverColor: "#777777" },
+  { node: <SiMongodb />, title: "MongoDB", href: "https://www.mongodb.com", hoverColor: "#47a248" },
+  { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com", hoverColor: "#4479a1" },
+  { node: <SiRedis />, title: "Redis", href: "https://redis.io", hoverColor: "#dc382d" },
+  { node: <SiLangchain />, title: "LangChain", href: "https://www.langchain.com", hoverColor: "#1c3c3c" },
+  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com", hoverColor: "#2496ed" },
+  { node: <SiKubernetes />, title: "Kubernetes", href: "https://kubernetes.io", hoverColor: "#326ce5" },
+  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com", hoverColor: "#38bdf8" },
+  { node: <SiGit />, title: "Git", href: "https://git-scm.com", hoverColor: "#f05032" },
+  { node: <SiGithub />, title: "GitHub", href: "https://github.com", hoverColor: "#6e5494" },
+  { node: <SiFigma />, title: "Figma", href: "https://www.figma.com", hoverColor: "#f24e1e" },
+  { node: <SiPostman />, title: "Postman", href: "https://www.postman.com", hoverColor: "#ff6c37" },
+];
 
 function SkillIcon({ skill }: { skill: string }) {
   const icon = skillMarks[skill] ?? { mark: "•", color: "#88f0dc" };
@@ -119,6 +163,7 @@ function Cursor() {
 export default function Portfolio() {
   const root = useRef<HTMLDivElement>(null);
   const preloader = useRef<HTMLDivElement>(null);
+  const themeButton = useRef<HTMLButtonElement>(null);
   const lenisInstance = useRef<import("lenis").default | null>(null);
   const [loading, setLoading] = useState(true);
   const [themeMode, setThemeMode] = useState<ThemeMode>("system");
@@ -158,8 +203,52 @@ export default function Portfolio() {
     } catch {
       // Theme selection still works for the current page without storage.
     }
-    setThemeMode(mode);
-    setThemeMenuOpen(false);
+    if (mode === themeMode) {
+      setThemeMenuOpen(false);
+      return;
+    }
+
+    const transitionDocument = document as Document & {
+      startViewTransition?: (update: () => void) => { finished: Promise<void> };
+    };
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const startViewTransition = transitionDocument.startViewTransition;
+
+    if (!startViewTransition || reduceMotion) {
+      setThemeMode(mode);
+      setThemeMenuOpen(false);
+      return;
+    }
+
+    const bounds = themeButton.current?.getBoundingClientRect();
+    const originX = bounds ? bounds.left + bounds.width / 2 : window.innerWidth / 2;
+    const originY = bounds ? bounds.top + bounds.height / 2 : 0;
+    const farX = Math.max(originX, window.innerWidth - originX);
+    const farY = Math.max(originY, window.innerHeight - originY);
+    const html = document.documentElement;
+    html.style.setProperty("--theme-reveal-x", `${originX}px`);
+    html.style.setProperty("--theme-reveal-y", `${originY}px`);
+    html.style.setProperty("--theme-reveal-radius", `${Math.ceil(Math.hypot(farX, farY))}px`);
+
+    const clearRevealOrigin = () => {
+      html.style.removeProperty("--theme-reveal-x");
+      html.style.removeProperty("--theme-reveal-y");
+      html.style.removeProperty("--theme-reveal-radius");
+    };
+
+    try {
+      const transition = startViewTransition.call(transitionDocument, () => {
+        flushSync(() => {
+          setThemeMode(mode);
+          setThemeMenuOpen(false);
+        });
+      });
+      transition.finished.then(clearRevealOrigin, clearRevealOrigin);
+    } catch {
+      clearRevealOrigin();
+      setThemeMode(mode);
+      setThemeMenuOpen(false);
+    }
   }
 
   function handleInPageNavigation(event: React.MouseEvent<HTMLDivElement>) {
@@ -285,7 +374,7 @@ export default function Portfolio() {
           <a href="#contact">Open to what’s next <span>04</span></a>
         </nav>
         <div className={styles.themeSwitcher} data-open={themeMenuOpen} onMouseEnter={() => setThemeMenuOpen(true)} onMouseLeave={() => setThemeMenuOpen(false)}>
-          <button type="button" className={styles.navContact} onClick={() => setThemeMenuOpen((open) => !open)} aria-label={`Choose theme, currently ${themeMode}`} aria-haspopup="menu" aria-expanded={themeMenuOpen}>
+          <button ref={themeButton} type="button" className={styles.navContact} onClick={() => setThemeMenuOpen((open) => !open)} aria-label={`Choose theme, currently ${themeMode}`} aria-haspopup="menu" aria-expanded={themeMenuOpen}>
             <span className={styles.themeIcon} aria-hidden="true">{themeMode === "system" ? "◐" : lightTheme ? "☼" : "☾"}</span>
           </button>
           <div className={styles.themeOptions} role="menu" aria-label="Choose color theme">
@@ -404,6 +493,9 @@ export default function Portfolio() {
                 <motion.article layoutId={`project-${project.id}`} className={`${styles.projectCard} ${styles[`project_${project.kind}`]}`} data-reveal style={{ "--project-accent": project.accent, "--project-index": index } as React.CSSProperties}>
                   <div className={styles.projectCardFace}>
                     <div className={styles.projectCardBody}>
+                      <div className={styles.projectPreview}>
+                        <Image src={project.image} alt={`${project.name} project screenshot`} fill sizes="(max-width: 760px) 100vw, 34vw" />
+                      </div>
                       <div className={styles.projectMeta}>
                         <h3>{project.name}</h3>
                         <span className={styles.projectCategory}>{project.category}</span>
@@ -413,7 +505,6 @@ export default function Portfolio() {
                       </div>
                       <nav className={styles.cardLinks} aria-label={`${project.name} links`}>
                         {project.availableLinks?.filter((item) => item.label.toLowerCase().includes("live")).map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">Live ↗</a>)}
-                        <a href={project.availableLinks?.find((item) => item.label.toLowerCase().includes("github"))?.href ?? links.github} target="_blank" rel="noreferrer">GitHub{project.availableLinks?.some((item) => item.label.toLowerCase().includes("github")) ? " ↗" : " profile ↗"}</a>
                       </nav>
                     </div>
                     <button type="button" className={styles.projectDetailsButton} onClick={() => setSelectedProject(project)}>
@@ -424,7 +515,7 @@ export default function Portfolio() {
               </ScrollStackItem>
             ))}
           </ScrollStack>
-          <p className={styles.projectFootnote}><span>↗</span> Open a project for its full case study. Project-specific links can be added when supplied.</p>
+          <p className={styles.projectFootnote}><span>↗</span> Open a project for its full case study.</p>
         </section>
 
         <section id="capabilities" className={styles.capabilitiesSection} aria-labelledby="capabilities-title">
@@ -436,6 +527,20 @@ export default function Portfolio() {
               <h3>{group.title}</h3>
               <div className={styles.skillTags}>{group.skills.map((skill) => <SkillIcon key={skill} skill={skill} />)}</div>
             </article>)}
+          </div>
+          <div className={styles.skillLogoLoop}>
+            <LogoLoop
+              logos={skillLogos}
+              speed={46}
+              direction="left"
+              logoHeight={34}
+              gap={40}
+              hoverSpeed={0}
+              scaleOnHover
+              labels="hover"
+              muted={0.18}
+              ariaLabel="Technology and tools from my skills"
+            />
           </div>
         </section>
 
@@ -535,7 +640,7 @@ export default function Portfolio() {
                   <a href={links.github} target="_blank" rel="noreferrer">GitHub profile ↗</a>
                   {selectedProject.availableLinks?.map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
                 </div>
-                {!selectedProject.availableLinks?.some((item) => item.label.toLowerCase().includes("live")) && <p className={styles.linksPending}>Project-specific repository and live URLs are not included yet.</p>}
+                {!selectedProject.availableLinks?.some((item) => item.label.toLowerCase().includes("live")) && <p className={styles.linksPending}>A live demo link is not available yet.</p>}
               </div>
             </div>
           </motion.section>

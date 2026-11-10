@@ -4,6 +4,7 @@
 
 * { box-sizing: border-box; }
 html { background: $ink; scroll-behavior: auto; }
+html { view-transition-name: root; }
 html[data-portfolio-theme="light"] { background: #f7f7f7; color-scheme: light; }
 html[data-portfolio-theme="light"] body { background: #f7f7f7; color: #111; }
 html[data-portfolio-theme="light"] .site .preloader { background: #f7f7f7; color: #111; }
@@ -34,4 +35,19 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+@keyframes theme-reveal {
+  from { clip-path: circle(0 at var(--theme-reveal-x) var(--theme-reveal-y)); }
+  to { clip-path: circle(var(--theme-reveal-radius) at var(--theme-reveal-x) var(--theme-reveal-y)); }
+}
+
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-reveal 820ms cubic-bezier(.2, .75, .25, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(root) { animation: none; }
 }

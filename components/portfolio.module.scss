@@ -729,6 +729,9 @@
 .skillCard { background: var(--surface); }
 .skillCard h3 { font-size: 30px; }
 .skillCard p { max-width: 440px; }
+.skillLogoLoop { margin: 64px 0 26px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--text); }
+.skillLogoLoop svg { display: block; width: 1em; height: 1em; }
+.skillLogoLoop [role="region"] { --logoloop-pad: 22px; }
 
 /* Light theme receives explicit dark text on light surfaces. */
 .lightTheme .hero h1 em, .lightTheme .sectionHeading h2 em,
@@ -806,6 +809,8 @@
   .cardLinks a, .stackList span { font-size: 12px; }
   .skillTags span { font-size: 13px; }
   .skillCard p { font-size: 14px; }
+  .skillLogoLoop { margin: 42px 0 16px; }
+  .skillLogoLoop [role="region"] { --logoloop-pad: 18px; }
   .skillItem { min-height: 36px; gap: 7px; padding-right: 8px; font-size: 12px; }
   .skillIcon { width: 23px; height: 23px; flex-basis: 23px; }
   .heroDescription { font-size: 14px; }
@@ -846,11 +851,23 @@
 .projectCard:nth-child(even) .projectCardFace { display: block; rotate: none; translate: none; }
 .projectCardBody {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(220px, .72fr) minmax(0, 1.5fr) auto;
   align-items: center;
-  gap: 36px;
+  gap: clamp(18px, 3vw, 42px);
   padding: 27px clamp(22px, 3vw, 42px) 24px;
 }
+.projectPreview {
+  position: relative;
+  width: 100%;
+  min-height: 190px;
+  aspect-ratio: 1.45;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+.projectPreview img { object-fit: cover; object-position: top center; transition: transform .45s ease; }
+.projectCard:hover .projectPreview img { transform: scale(1.035); }
 .projectMeta { min-width: 0; padding: 0; }
 .projectMeta h3 { margin: 0 0 5px; font-size: clamp(30px, 3.5vw, 44px); line-height: 1.05; }
 .projectCategory { display: block; color: var(--accent); font: 11px/1.5 $font-mono; letter-spacing: .04em; }
@@ -901,6 +918,7 @@
 @media (max-width: 760px) {
   .projectStackItem { border-radius: 20px; }
   .projectCardBody { grid-template-columns: 1fr; gap: 18px; padding: 21px 18px 19px; }
+  .projectPreview { min-height: 0; aspect-ratio: 1.7; }
   .projectMeta h3 { font-size: 32px; }
   .projectCategory { font-size: 10px; }
   .projectDescription { margin-top: 11px; font-size: 13px; }
