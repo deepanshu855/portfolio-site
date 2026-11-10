@@ -1,0 +1,33 @@
+.stack {
+  position: relative;
+  width: 100%;
+}
+
+.stackInner {
+  position: relative;
+  padding-inline: clamp(0px, 0%, 0px);
+}
+
+.stackSlot {
+  position: sticky;
+  top: 15%;
+}
+
+.stackItem {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 34px;
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.dimLayer {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  border-radius: inherit;
+  background: #000;
+  opacity: var(--scroll-stack-dim, 0);
+  pointer-events: none;
+}
