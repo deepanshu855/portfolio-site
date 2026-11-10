@@ -50,7 +50,7 @@ function ContactIcon({ name }: { name: ContactIconName }) {
   return <svg className={styles.linkIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v12m-5-5 5 5 5-5M5 20h14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 }
 
-const HeroScene = dynamic(() => import("./hero-scene"), {
+const DitherVeil = dynamic(() => import("./dither-veil"), {
   ssr: false,
   loading: () => <div className={styles.orbFallback} aria-hidden="true" />,
 });
@@ -124,7 +124,6 @@ export default function Portfolio() {
   const [systemPrefersLight, setSystemPrefersLight] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showScene, setShowScene] = useState(false);
   const lightTheme = themeMode === "light" || (themeMode === "system" && systemPrefersLight);
 
   useLayoutEffect(() => {
@@ -188,9 +187,6 @@ export default function Portfolio() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const smallScreen = window.matchMedia("(max-width: 760px)").matches;
-    setShowScene(!reduceMotion && !smallScreen);
-
     let lenis: import("lenis").default | undefined;
     let raf: ((time: number) => void) | undefined;
     let ctx: gsap.Context | undefined;
@@ -358,9 +354,22 @@ export default function Portfolio() {
             </div>
             <div className={styles.heroProof}><span>CGPA <strong>9.25</strong> / 10</span><i /><span>SEMESTER TOPPER <strong>× 2</strong></span></div>
           </div>
-          <div className={styles.heroVisual} aria-label="Decorative 3D signal orb">
+          <div className={styles.heroVisual} aria-label="Decorative dithered image effect">
             <div className={styles.visualGrid} aria-hidden="true" />
-            <div className={styles.orbWrap}>{showScene ? <HeroScene lightTheme={lightTheme} /> : <div className={styles.orbFallback} aria-hidden="true" />}</div>
+            <div className={styles.orbWrap}>
+              <DitherVeil
+                className={styles.ditherVeil}
+                src="https://images.unsplash.com/photo-1737071371043-761e02b1ef95?q=80&w=1400&auto=format&fit=crop"
+                pattern="floyd"
+                pixelSize={2}
+                inkColor="#120f17"
+                paperColor="#f4f1ea"
+                revealRadius={200}
+                softness={0.6}
+                linger={1}
+                removeBackground
+              />
+            </div>
             <div className={styles.coordinate}>FULL-STACK<br />GENERATIVE AI</div>
             <div className={styles.visualCaption}><span>BUILDING AT THE INTERSECTION</span><strong>of systems & feeling</strong></div>
             <div className={styles.visualCross}>+</div>
