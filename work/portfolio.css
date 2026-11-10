@@ -1,12 +1,12 @@
 .site {
-  --ink: #080a0b;
-  --surface: #0d1012;
-  --surface-raised: #111618;
-  --line: rgba(223, 237, 236, .12);
-  --text: #eef3f1;
-  --muted: #99a5a3;
-  --accent: #88f0dc;
-  --accent-blue: #8ba4ff;
+  --ink: #050505;
+  --surface: #0a0a0a;
+  --surface-raised: #111111;
+  --line: rgba(255, 255, 255, .16);
+  --text: #f4f4f4;
+  --muted: #a6a6a6;
+  --accent: #f4f4f4;
+  --accent-blue: #bcbcbc;
   position: relative;
   min-height: 100vh;
   overflow: clip;
@@ -15,14 +15,14 @@
 }
 
 .lightTheme {
-  --ink: #e8ede9;
-  --surface: #f5f7f4;
-  --surface-raised: #e1e8e3;
-  --line: rgba(17, 34, 27, .2);
-  --text: #101814;
-  --muted: #35433c;
-  --accent: #006b60;
-  --accent-blue: #38478f;
+  --ink: #e6e6e6;
+  --surface: #f3f3f3;
+  --surface-raised: #dedede;
+  --line: rgba(0, 0, 0, .2);
+  --text: #111111;
+  --muted: #3d3d3d;
+  --accent: #161616;
+  --accent-blue: #555555;
 }
 
 .lightTheme .nav, .lightTheme .signalStrip, .lightTheme .achievementRow {
@@ -45,13 +45,13 @@
   color: #52615c;
 }
 
-.lightTheme .projectCard, .lightTheme .skillCard, .lightTheme .educationCard, .lightTheme .achievementRow {
+.lightTheme .projectCardFace, .lightTheme .skillCard, .lightTheme .educationCard, .lightTheme .achievementRow {
   border-color: var(--line);
   background: var(--surface);
 }
 
-.lightTheme .projectCard {
-  box-shadow: 0 12px 34px rgba(25, 45, 39, 0.06);
+.lightTheme .projectCardFace {
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.08);
 }
 
 .lightTheme .cardLinks a {
@@ -119,13 +119,13 @@
   color: #30403a;
 }
 
-.lightTheme .projectModal {
+.lightTheme .modalFace {
   border-color: var(--line);
   background: var(--surface);
 }
 
 .lightTheme .modalBackdrop {
-  background: rgba(38, 53, 48, 0.38);
+  background: rgba(24, 24, 24, 0.5);
 }
 
 .lightTheme .modalContent h2 {
@@ -161,6 +161,7 @@
   inset: 0;
   overflow: clip;
   pointer-events: none;
+  filter: grayscale(1);
 }
 
 .backgroundGrid > span {
@@ -220,6 +221,10 @@
   z-index: 1;
 }
 
+.site > main {
+  filter: grayscale(1);
+}
+
 .cursor {
   position: fixed;
   z-index: 50;
@@ -227,11 +232,12 @@
   left: 0;
   width: 13px;
   height: 13px;
-  border: 1px solid rgba(136, 240, 220, 0.8);
+  border: 1px solid rgba(245, 245, 245, 0.8);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   opacity: 0.8;
+  filter: grayscale(1);
   transition: width 0.18s ease, height 0.18s ease, background 0.18s ease;
 }
 
@@ -249,7 +255,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   align-items: end;
   padding: 42px 5vw;
-  background: #080a0b;
+  background: #050505;
+  filter: grayscale(1);
 }
 
 .preloaderMark {
@@ -782,12 +789,15 @@
 
 .projectCard {
   min-width: 0;
+}
+
+.projectCardFace {
   border: 1px solid rgba(223, 237, 236, 0.1);
   background: #0c0f10;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 
-.projectCard:hover {
+.projectCard:hover .projectCardFace {
   border-color: color-mix(in srgb, var(--project-accent) 55%, transparent);
   box-shadow: 0 0 32px color-mix(in srgb, var(--project-accent) 8%, transparent);
 }
@@ -1758,6 +1768,7 @@
   background: rgba(10, 14, 15, 0.8);
   backdrop-filter: blur(15px);
   transform: translateY(-50%);
+  filter: grayscale(1);
 }
 
 .fastTrack a {
@@ -1790,20 +1801,28 @@
   place-items: center;
   padding: 26px;
   overflow-y: auto;
-  background: rgba(3, 5, 5, 0.84);
-  backdrop-filter: blur(12px);
+  background: rgba(3, 3, 3, 0.62);
+  backdrop-filter: blur(7px);
 }
 
 .projectModal {
   position: relative;
-  display: grid;
   width: min(1050px, 100%);
+  max-height: min(850px, 94dvh);
+  filter: grayscale(1);
+}
+
+.modalFace {
+  position: relative;
+  display: grid;
+  width: 100%;
   max-height: min(850px, 94dvh);
   grid-template-columns: 1.12fr 0.88fr;
   overflow: auto;
   border: 1px solid rgba(223, 237, 236, 0.18);
   background: #0c1011;
   box-shadow: 0 30px 100px rgba(0, 0, 0, 0.58);
+  transform-origin: 50% 50%;
 }
 
 .modalClose {
@@ -2244,6 +2263,9 @@
   }
   .projectModal {
     max-height: 94dvh;
+  }
+  .modalFace {
+    max-height: 94dvh;
     grid-template-columns: 1fr;
   }
   .modalArtwork {
@@ -2345,7 +2367,11 @@
   position: sticky;
   top: clamp(82px, 10vh, 112px);
   z-index: calc(10 + var(--project-index, 0));
-  rotate: -2deg;
+}
+
+.projectCardFace {
+  position: relative;
+  rotate: -2.4deg;
   translate: -42px 0;
   transform-origin: 50% 14%;
   display: grid;
@@ -2356,23 +2382,10 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.32);
 }
 
-.projectCard:nth-child(even) {
-  rotate: 1.8deg;
+.projectCard:nth-child(even) .projectCardFace {
+  rotate: 2.2deg;
   translate: 42px 0;
-}
-
-.projectCard:nth-child(even) {
   grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
-}
-
-.projectCard:nth-child(even) .projectOpen {
-  order: 2;
-}
-
-.projectCard:nth-child(even) .cardLinks {
-  order: 1;
-  justify-content: flex-start;
-  padding-left: 25px;
 }
 
 .projectOpen {
@@ -2466,6 +2479,8 @@
 
 .projectCard:nth-child(even) .cardLinks {
   grid-column: 1;
+  justify-content: flex-start;
+  padding-left: 25px;
 }
 
 .cardLinks a {
@@ -2486,7 +2501,7 @@
   font-size: 12px;
 }
 
-.projectCard:hover {
+.projectCard:hover .projectCardFace {
   border-color: color-mix(in srgb, var(--project-accent) 70%, var(--line));
 }
 
@@ -2673,24 +2688,25 @@
 }
 
 @media (max-width: 760px) {
-  .projectCard, .projectCard:nth-child(even) {
+  .projectCard {
+    display: block;
+  }
+  .projectCardFace, .projectCard:nth-child(even) .projectCardFace {
     display: flex;
     flex-direction: column;
-    rotate: -1deg;
+    rotate: -1.25deg;
     translate: -8px 0;
   }
-  .projectCard:nth-child(even) {
-    rotate: 0.9deg;
+  .projectCard:nth-child(even) .projectCardFace {
+    rotate: 1.1deg;
     translate: 8px 0;
   }
   .projectCard {
     top: 73px;
   }
-  .projectCard:nth-child(even) .projectOpen {
-    order: 0;
-  }
   .projectCard:nth-child(even) .cardLinks {
-    order: 0;
+    justify-content: flex-start;
+    padding-left: 19px;
   }
   .projectImage, .projectFeature .projectImage {
     grid-column: 1;

@@ -1,6 +1,6 @@
 @use "../app/variables" as *;
 
-.widget { position: fixed; z-index: 30; right: 28px; bottom: 28px; display: grid; justify-items: end; gap: 12px; }
+.widget { position: fixed; z-index: 30; right: 28px; bottom: 28px; display: grid; justify-items: end; gap: 12px; filter: grayscale(1); }
 .launcher { display: flex; align-items: center; gap: 11px; height: 50px; padding: 0 18px 0 11px; border: 1px solid rgba(136, 240, 220, .38); border-radius: 999px; background: color-mix(in srgb, var(--surface) 92%, transparent); color: var(--text); font-size: 11px; letter-spacing: .035em; cursor: pointer; backdrop-filter: blur(16px); box-shadow: 0 10px 38px rgba(0,0,0,.24); transition: border-color .2s, background .2s; }
 .launcher:hover { border-color: var(--accent); background: var(--surface); }
 .launcherIcon { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 50%; background: var(--accent); color: #07100f; font-size: 17px; }

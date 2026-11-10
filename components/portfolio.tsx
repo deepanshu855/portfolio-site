@@ -263,21 +263,23 @@ export default function Portfolio() {
           <div className={styles.projectGrid}>
             {projects.map((project, index) => (
               <motion.article key={project.id} layoutId={`project-${project.id}`} className={`${styles.projectCard} ${styles[`project_${project.kind}`]}`} data-reveal style={{ "--project-accent": project.accent, "--project-index": index } as React.CSSProperties}>
-                <button type="button" className={styles.projectOpen} onClick={() => setSelectedProject(project)} aria-label={`View ${project.name} project details`}>
-                  <div className={styles.projectImage}><ProjectArtwork kind={project.kind} /><span className={styles.openIcon}>↗</span></div>
-                  <div className={styles.projectMeta}>
-                    <span>{project.number} <i>/</i> {project.category}</span><h3>{project.name}</h3>
-                    <div className={styles.projectNarrative}>
-                      <p><strong>PROBLEM SPACE</strong>{project.problem}</p>
-                      <p><strong>WHAT I BUILT</strong>{project.solution}</p>
+                <div className={styles.projectCardFace}>
+                  <button type="button" className={styles.projectOpen} onClick={() => setSelectedProject(project)} aria-label={`View ${project.name} project details`}>
+                    <div className={styles.projectImage}><ProjectArtwork kind={project.kind} /><span className={styles.openIcon}>↗</span></div>
+                    <div className={styles.projectMeta}>
+                      <span>{project.number} <i>/</i> {project.category}</span><h3>{project.name}</h3>
+                      <div className={styles.projectNarrative}>
+                        <p><strong>PROBLEM SPACE</strong>{project.problem}</p>
+                        <p><strong>WHAT I BUILT</strong>{project.solution}</p>
+                      </div>
+                      <div className={styles.stackHeading}>TECH STACK</div>
+                      <div className={styles.stackList}>{project.stack.map((stack) => <span key={stack}>{stack}</span>)}</div>
                     </div>
-                    <div className={styles.stackHeading}>TECH STACK</div>
-                    <div className={styles.stackList}>{project.stack.map((stack) => <span key={stack}>{stack}</span>)}</div>
+                  </button>
+                  <div className={styles.cardLinks}>
+                    <a href={project.availableLinks?.find((item) => item.label.toLowerCase().includes("github"))?.href ?? links.github} target="_blank" rel="noreferrer">GitHub{project.availableLinks?.some((item) => item.label.toLowerCase().includes("github")) ? " ↗" : " profile ↗"}</a>
+                    {project.availableLinks?.filter((item) => item.label.toLowerCase().includes("live")).map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">Live ↗</a>)}
                   </div>
-                </button>
-                <div className={styles.cardLinks}>
-                  <a href={project.availableLinks?.find((item) => item.label.toLowerCase().includes("github"))?.href ?? links.github} target="_blank" rel="noreferrer">GitHub{project.availableLinks?.some((item) => item.label.toLowerCase().includes("github")) ? " ↗" : " profile ↗"}</a>
-                  {project.availableLinks?.filter((item) => item.label.toLowerCase().includes("live")).map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">Live ↗</a>)}
                 </div>
               </motion.article>
             ))}
@@ -345,15 +347,17 @@ export default function Portfolio() {
         {selectedProject && <motion.div className={styles.modalBackdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)}>
           <motion.section layoutId={`project-${selectedProject.id}`} className={styles.projectModal} role="dialog" aria-modal="true" aria-labelledby="modal-title" onClick={(event) => event.stopPropagation()}>
             <button type="button" className={styles.modalClose} onClick={() => setSelectedProject(null)} aria-label="Close project details">× <span>CLOSE</span></button>
-            <div className={styles.modalArtwork}><ProjectArtwork kind={selectedProject.kind} /><div className={styles.modalImageNote}>PROJECT SCREENSHOT<br /><span>PLACEHOLDER · REPLACE WHEN PROVIDED</span></div></div>
-            <div className={styles.modalContent}><span className={styles.sectionLabel}>{selectedProject.number} / {selectedProject.category}</span><h2 id="modal-title">{selectedProject.name}<span>.</span></h2>
-              <div className={styles.modalNarrative}><h3>PROBLEM SPACE</h3><p>{selectedProject.problem}</p><h3>WHAT IT DOES</h3><p>{selectedProject.solution}</p><h3>IMPLEMENTATION</h3><p>{selectedProject.detail}</p></div>
-              <h3>TECH STACK</h3><div className={styles.modalStacks}>{selectedProject.stack.map((stack) => <span key={stack}>{stack}</span>)}</div>
-              <div className={styles.modalLinks}>
-                <a href={links.github} target="_blank" rel="noreferrer">GitHub profile ↗</a>
-                {selectedProject.availableLinks?.map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
+            <div className={styles.modalFace}>
+              <div className={styles.modalArtwork}><ProjectArtwork kind={selectedProject.kind} /><div className={styles.modalImageNote}>PROJECT SCREENSHOT<br /><span>PLACEHOLDER · REPLACE WHEN PROVIDED</span></div></div>
+              <div className={styles.modalContent}><span className={styles.sectionLabel}>{selectedProject.number} / {selectedProject.category}</span><h2 id="modal-title">{selectedProject.name}<span>.</span></h2>
+                <div className={styles.modalNarrative}><h3>PROBLEM SPACE</h3><p>{selectedProject.problem}</p><h3>WHAT IT DOES</h3><p>{selectedProject.solution}</p><h3>IMPLEMENTATION</h3><p>{selectedProject.detail}</p></div>
+                <h3>TECH STACK</h3><div className={styles.modalStacks}>{selectedProject.stack.map((stack) => <span key={stack}>{stack}</span>)}</div>
+                <div className={styles.modalLinks}>
+                  <a href={links.github} target="_blank" rel="noreferrer">GitHub profile ↗</a>
+                  {selectedProject.availableLinks?.map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
+                </div>
+                {!selectedProject.availableLinks?.some((item) => item.label.toLowerCase().includes("live")) && <p className={styles.linksPending}>Project-specific repository and live URLs are not included yet.</p>}
               </div>
-              {!selectedProject.availableLinks?.some((item) => item.label.toLowerCase().includes("live")) && <p className={styles.linksPending}>Project-specific repository and live URLs are not included yet.</p>}
             </div>
           </motion.section>
         </motion.div>}
