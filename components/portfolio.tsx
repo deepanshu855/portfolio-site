@@ -169,6 +169,7 @@ export default function Portfolio() {
   const [themeMode, setThemeMode] = useState<ThemeMode>("system");
   const [systemPrefersLight, setSystemPrefersLight] = useState(false);
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const lightTheme = themeMode === "light" || (themeMode === "system" && systemPrefersLight);
 
@@ -367,12 +368,24 @@ export default function Portfolio() {
 
       <header className={styles.nav}>
         <a href="#top" className={styles.wordmark} aria-label="Deepanshu Sharma home">D<span>/</span>S</a>
-        <nav aria-label="Main navigation">
+        <nav id="primary-navigation" className={styles.navLinks} data-open={mobileNavOpen} aria-label="Main navigation" onClick={() => setMobileNavOpen(false)}>
           <a href="#work">Projects <span>01</span></a>
           <a href="#capabilities">Skills <span>02</span></a>
           <a href="#background">Background <span>03</span></a>
-          <a href="#contact">Open to what’s next <span>04</span></a>
+          <a href="#contact">Contact <span>04</span></a>
         </nav>
+        <button
+          type="button"
+          className={styles.navMenuToggle}
+          aria-label={mobileNavOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-controls="primary-navigation"
+          aria-expanded={mobileNavOpen}
+          onClick={() => setMobileNavOpen((open) => !open)}
+        >
+          <span className={styles.navMenuIcon} data-open={mobileNavOpen} aria-hidden="true">
+            {mobileNavOpen ? "×" : <><i /><i /><i /></>}
+          </span>
+        </button>
         <div className={styles.themeSwitcher} data-open={themeMenuOpen} onMouseEnter={() => setThemeMenuOpen(true)} onMouseLeave={() => setThemeMenuOpen(false)}>
           <button ref={themeButton} type="button" className={styles.navContact} onClick={() => setThemeMenuOpen((open) => !open)} aria-label={`Choose theme, currently ${themeMode}`} aria-haspopup="menu" aria-expanded={themeMenuOpen}>
             <span className={styles.themeIcon} aria-hidden="true">{themeMode === "system" ? "◐" : lightTheme ? "☼" : "☾"}</span>
@@ -563,7 +576,7 @@ export default function Portfolio() {
 
         <section id="contact" className={styles.contactSection} aria-labelledby="contact-title">
           <div className={styles.contactOrbit} aria-hidden="true" />
-          <p className={styles.sectionLabel}>04 / OPEN TO WHAT’S NEXT</p>
+          <p className={styles.sectionLabel}>04 / Contact</p>
           <h2 id="contact-title">Good work<br />starts with <em>a hello.</em></h2>
           <FolderFloat
             items={[
@@ -625,7 +638,7 @@ export default function Portfolio() {
       <AnimatePresence>
         {selectedProject && <motion.div className={styles.modalBackdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)}>
           <motion.section layoutId={`project-${selectedProject.id}`} className={styles.projectModal} role="dialog" aria-modal="true" aria-labelledby="modal-title" onClick={(event) => event.stopPropagation()}>
-            <button type="button" className={styles.modalClose} onClick={() => setSelectedProject(null)} aria-label="Close project details">× <span>CLOSE</span></button>
+            <button type="button" className={styles.modalClose} onClick={() => setSelectedProject(null)} aria-label="Close project details">×</button>
             <div className={styles.modalFace} data-lenis-prevent>
               <div className={styles.modalContent}>
                 <span className={styles.sectionLabel}>{selectedProject.number} / {selectedProject.category}</span>
