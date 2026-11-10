@@ -12,10 +12,6 @@ Requires Node.js 20.9 or newer.
 
 Before deployment, set `NEXT_PUBLIC_SITE_URL` to the final public origin. The résumé is served from `public/resume.pdf`.
 
-## Portfolio assistant
-
-The chat interface forwards messages from the server route to an OpenAI-compatible chat-completions endpoint. Configure `CHAT_API_URL`, `CHAT_API_KEY`, and `CHAT_MODEL` in `.env.local`. The key stays server-side. Without those values, the widget gives a contact fallback instead of pretending to provide AI responses.
-
 ## Content still to supply
 
 - Landing-page screenshots for the six project cards. Current artwork is a set of CSS mockups and each project modal marks its image as a placeholder.

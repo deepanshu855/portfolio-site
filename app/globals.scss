@@ -4,6 +4,15 @@
 
 * { box-sizing: border-box; }
 html { background: $ink; scroll-behavior: auto; }
+html[data-portfolio-theme="light"] { background: #f7f7f7; color-scheme: light; }
+html[data-portfolio-theme="light"] body { background: #f7f7f7; color: #111; }
+html[data-portfolio-theme="light"] .site .preloader { background: #f7f7f7; color: #111; }
+html[data-portfolio-theme="light"] .site .bootText { color: #394944; }
+html[data-portfolio-theme="light"] .site .bootText > span,
+html[data-portfolio-theme="light"] .site .bootText p span,
+html[data-portfolio-theme="light"] .site .bootIndex { color: #25332f; }
+html[data-portfolio-theme="light"] .site .bootText div { background: #d6ddda; }
+html[data-portfolio-theme="light"] .site .bootText div i { background: #25332f; }
 body {
   margin: 0;
   background: $ink;

@@ -59,7 +59,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `try { const saved = localStorage.getItem("portfolio-theme"); const mode = saved === "light" || saved === "dark" || saved === "system" ? saved : "system"; const light = mode === "light" || (mode === "system" && matchMedia("(prefers-color-scheme: light)").matches); document.documentElement.dataset.portfolioTheme = light ? "light" : "dark"; document.documentElement.style.colorScheme = light ? "light" : "dark"; } catch { const light = matchMedia("(prefers-color-scheme: light)").matches; document.documentElement.dataset.portfolioTheme = light ? "light" : "dark"; document.documentElement.style.colorScheme = light ? "light" : "dark"; }` }} />
+      </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePage).replace(/</g, "\\u003c") }} />
         {children}

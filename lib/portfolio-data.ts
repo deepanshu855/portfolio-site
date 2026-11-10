@@ -96,32 +96,36 @@ export const projects: Project[] = [
 
 export const skillGroups = [
   {
-    index: "01",
-    title: "Full-stack engineering",
-    description: "Building product flows from the interface through APIs, data, and real-time systems.",
-    skills: ["React", "Next.js", "TypeScript", "Node.js", "Express", "REST APIs", "Socket.IO", "Redis", "MongoDB", "MySQL"],
-    className: "wide",
+    title: "Languages",
+    skills: ["Java", "JavaScript (ES6+)", "TypeScript", "Python"],
   },
   {
-    index: "02",
-    title: "Generative AI",
-    description: "Connecting language models to useful, grounded product experiences.",
-    skills: ["LLM integration", "RAG", "AI agents", "LangChain", "LangGraph", "Mistral AI", "Prompt engineering"],
-    className: "tall",
+    title: "Frontend",
+    skills: ["React.js", "Next.js", "Redux Toolkit", "Context API", "Tailwind CSS", "Sass"],
   },
   {
-    index: "03",
-    title: "Cloud & delivery",
-    description: "Containerized services and the fundamentals to ship them reliably.",
-    skills: ["AWS · ECS / ECR / S3", "Docker", "Docker Compose", "Kubernetes", "Skaffold", "CI/CD"],
-    className: "standard",
+    title: "Backend",
+    skills: ["Node.js", "Express.js", "REST APIs", "JWT", "Socket.IO (WebSockets)", "Redis", "Microservices"],
   },
   {
-    index: "04",
-    title: "Design & foundations",
-    description: "Thoughtful interfaces backed by strong computer science fundamentals.",
-    skills: ["Figma", "Wireframing", "Prototyping", "Tailwind CSS", "Sass", "DSA", "OOP", "System design basics"],
-    className: "standard",
+    title: "Databases",
+    skills: ["MongoDB", "MySQL"],
+  },
+  {
+    title: "AI / GenAI",
+    skills: ["Generative AI", "LLM Integration", "LangChain", "LangGraph", "Mistral AI", "AI Agents", "RAG", "Prompt Engineering"],
+  },
+  {
+    title: "DevOps & Cloud",
+    skills: ["AWS (ECS, ECR, S3)", "Docker", "Docker Compose", "Kubernetes", "Skaffold", "CI/CD"],
+  },
+  {
+    title: "Tools",
+    skills: ["Git", "GitHub", "Postman", "Figma", "Warp"],
+  },
+  {
+    title: "Core Concepts",
+    skills: ["Data Structures and Algorithms", "OOP", "System Design Basics", "Microservices Architecture"],
   },
 ];
 
