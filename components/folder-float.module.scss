@@ -1,0 +1,170 @@
+.root {
+  position: relative;
+  display: inline-block;
+  width: var(--ff-w);
+  padding-top: var(--ff-tab);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.cloudAnchor {
+  position: absolute;
+  z-index: 3;
+  top: var(--ff-tab);
+  left: 50%;
+  width: 0;
+  height: 0;
+}
+
+.root[data-open] .cloudAnchor::before {
+  position: absolute;
+  top: calc(-1 * (var(--ff-lift) + 120px));
+  left: calc(-1 * (var(--ff-spread) + 100px));
+  width: calc(2 * var(--ff-spread) + 200px);
+  height: calc(var(--ff-lift) + 120px);
+  content: "";
+}
+
+.pill {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 50%;
+  display: flex;
+  height: 34px;
+  align-items: center;
+  margin: 0;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 17px;
+  background: var(--ff-item);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 14%);
+  color: var(--ff-item-ink);
+  font: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0;
+  outline: none;
+  pointer-events: none;
+  transform: translate(-50%, 44px) scale(.6);
+  transform-origin: 50% 50%;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--ff-close) var(--ff-ease-out) calc((var(--ff-n) - 1 - var(--i)) * var(--ff-stagger) * .5), opacity 160ms ease calc((var(--ff-n) - 1 - var(--i)) * var(--ff-stagger) * .5 + var(--ff-close) * .45), scale 160ms var(--ff-ease-out);
+}
+
+.root[data-open] .pill {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(calc(-50% + var(--x)), var(--y)) rotate(var(--r)) scale(1);
+  transition: transform var(--ff-open) var(--ff-spring) calc(var(--i) * var(--ff-stagger)), opacity 160ms ease calc(var(--i) * var(--ff-stagger)), scale 160ms var(--ff-ease-out);
+}
+
+.root[data-open] .pill:hover { scale: 1.05; }
+.root[data-open] .pill:active { scale: .97; }
+.root[data-live] .pill { cursor: grab; transition: scale 160ms var(--ff-ease-out); }
+.root[data-live] .pill[data-drag] { cursor: grabbing; }
+.pillLabel { animation: folder-float-drift 3.2s ease-in-out infinite; animation-delay: calc(var(--i) * -.7s); animation-play-state: paused; }
+.root[data-open] .pillLabel { animation-play-state: running; }
+.root[data-physics] .pillLabel, .root[data-live] .pillLabel { animation: none; }
+.pill[data-pop] { animation: folder-float-pop 320ms var(--ff-ease-out); }
+
+.folder {
+  position: relative;
+  z-index: 2;
+  width: var(--ff-w);
+  height: var(--ff-h);
+}
+
+.back {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: var(--ff-r);
+  background: var(--ff-back);
+  transform: perspective(600px) rotateX(8deg);
+  transform-origin: 50% 100%;
+}
+
+.back::before {
+  position: absolute;
+  top: calc(-1 * var(--ff-tab));
+  left: 0;
+  width: 42%;
+  height: calc(var(--ff-tab) + var(--ff-r));
+  border-radius: var(--ff-r) var(--ff-r) 0 0;
+  background: inherit;
+  content: "";
+}
+
+.paper {
+  position: absolute;
+  z-index: 1;
+  top: 10%;
+  right: 8%;
+  left: 8%;
+  height: 50%;
+  border-radius: 6px;
+  background: var(--ff-paper);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: transform var(--ff-close) var(--ff-ease-out), opacity var(--ff-close) ease;
+}
+
+.root[data-open] .paper {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform var(--ff-open) var(--ff-ease-out), opacity 200ms ease;
+}
+
+.front {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: 76%;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 12px 16px 14px;
+  border-radius: var(--ff-r);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ff-front) 92%, #fff), color-mix(in srgb, var(--ff-front) 60%, #000));
+  box-shadow: 0 -10px 24px rgb(0 0 0 / 28%);
+  color: var(--ff-label);
+  transform: perspective(600px) rotateX(calc(-1 * var(--ff-rest)));
+  transform-origin: 50% 100%;
+  transition: transform var(--ff-open) var(--ff-ease-out);
+  pointer-events: none;
+}
+
+.root[data-open] .front { transform: perspective(600px) rotateX(calc(-1 * var(--ff-angle))); }
+.folderLabel { font-size: 13px; font-weight: 500; }
+.folderSublabel { font-size: 11px; opacity: .55; }
+
+.toggle {
+  position: absolute;
+  z-index: 3;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 76%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ff-r);
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill, .root[data-open] .pill { transition: opacity 200ms ease; }
+  .pillLabel { animation: none; }
+  .paper, .front { transition: opacity 200ms ease; transform: none; }
+}

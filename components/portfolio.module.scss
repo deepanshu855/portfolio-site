@@ -428,6 +428,7 @@
 .contactSection h2 { font-size: clamp(54px,8vw,100px); }
 .contactEmail { margin-top: 30px; color: #cbd8d4; font: 11px $font-mono; }
 .contactEmail span { color: var(--accent); }
+.contactFolder { margin-top: 56px; }
 .contactLinks { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin-top: 29px; }
 .contactLinks a { padding: 10px 12px; border: 1px solid rgba(223,237,236,.16); color: #aeb9b6; font: 8px $font-mono; transition: color .2s,border-color .2s; }
 .contactLinks a:hover { border-color: var(--accent); color: var(--accent); }
@@ -486,8 +487,8 @@
   .primaryAction { min-height: 41px; gap: 12px; font-size: 9px; }
   .textAction { font-size: 9px; }
   .heroProof { margin-top: 25px; }
-  .heroVisual { position: absolute; z-index: 1; right: -7%; bottom: 12%; width: 76%; min-height: 300px; height: 35%; }
-  .orbWrap { display: none; }
+  .heroVisual { position: absolute; z-index: 1; right: -6%; bottom: 1%; width: min(88vw, 420px); min-height: 340px; height: 45%; }
+  .orbWrap { display: block; }
   .orbFallback { top: 6%; right: 4%; width: 78%; }
   .coordinate, .visualCaption, .visualCross { display: none; }
   .scrollCue { display: none; }

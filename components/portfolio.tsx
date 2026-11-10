@@ -9,6 +9,7 @@ import { links, projects, Project, skillGroups } from "@/lib/portfolio-data";
 import styles from "./portfolio.module.scss";
 import ScrollStack, { ScrollStackItem } from "./scroll-stack";
 import TechText from "./tech-text";
+import FolderFloat from "./folder-float";
 
 type ThemeMode = "system" | "light" | "dark";
 
@@ -459,14 +460,40 @@ export default function Portfolio() {
           <div className={styles.contactOrbit} aria-hidden="true" />
           <p className={styles.sectionLabel}>04 / OPEN TO WHAT’S NEXT</p>
           <h2 id="contact-title">Good work<br />starts with <em>a hello.</em></h2>
-          <a className={styles.contactEmail} href={links.email}>deepanshusharma040@gmail.com <span>↗</span></a>
-          <div className={styles.contactLinks}>
-            <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
-            <a href={links.github} target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-            <a href={links.leetcode} target="_blank" rel="noreferrer">LeetCode <span>↗</span></a>
-            <a href="tel:+919319276626">Phone <span>↗</span></a>
-            <a href="/resume.pdf" download>Résumé PDF <span>↓</span></a>
-          </div>
+          <FolderFloat
+            items={[
+              { label: "Email", value: links.email },
+              { label: "LinkedIn", value: links.linkedin },
+              { label: "GitHub", value: links.github },
+              { label: "LeetCode", value: links.leetcode },
+              { label: "Phone", value: "tel:+919319276626" },
+              { label: "Résumé PDF", value: "/resume.pdf" },
+            ]}
+            label="Let’s connect"
+            sublabel="6 ways to reach me"
+            trigger="click"
+            closeOnSelect
+            physics
+            drift={0.5}
+            folderColor="#3f3f46"
+            frontColor="#52525b"
+            paperColor="#f5f5f5"
+            itemColor="#f5f5f5"
+            itemTextColor="#18181b"
+            labelColor="#f5f5f5"
+            width={200}
+            height={148}
+            radius={14}
+            spread={180}
+            lift={26}
+            tilt={8}
+            flapAngle={34}
+            restAngle={16}
+            openDuration={520}
+            stagger={45}
+            bounce={0.3}
+            className={styles.contactFolder}
+          />
         </section>
       </main>
 
