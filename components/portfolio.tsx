@@ -8,6 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { links, projects, Project, skillGroups } from "@/lib/portfolio-data";
 import styles from "./portfolio.module.scss";
 import ScrollStack, { ScrollStackItem } from "./scroll-stack";
+import TechText from "./tech-text";
 
 type ThemeMode = "system" | "light" | "dark";
 
@@ -305,7 +306,50 @@ export default function Portfolio() {
           <div className={styles.heroCopy}>
             <p className={styles.eyebrow}><span className={styles.liveDot} /> SEEKING INTERNSHIPS & PLACEMENTS <span className={styles.heroIndex}>SRM · SONIPAT</span></p>
             <p className={styles.heroKicker}>FINAL-YEAR B.TECH CSE · 2023 — 2027</p>
-            <h1 id="hero-title">Deepanshu<br /><em>Sharma</em><span className={styles.heroPeriod}>.</span></h1>
+            <h1 id="hero-title" className={styles.heroTitle}>
+              <span className={styles.heroTechLine}>
+                <span className={styles.heroTechSource}>Deepanshu</span>
+                <TechText
+                  className={styles.heroTechCanvas}
+                  text="Deepanshu"
+                  fontWeight={600}
+                  fontSize={150}
+                  letterSpacing={-0.095}
+                  align="left"
+                  color="currentColor"
+                  accentColor="currentColor"
+                  reveal="letter"
+                  dashLength={4}
+                  dashGap={2}
+                  specks={15}
+                  intro="none"
+                  introDuration={2}
+                  clickKick
+                  guides={false}
+                />
+              </span>
+              <span className={`${styles.heroTechLine} ${styles.heroTechMuted}`}>
+                <span className={styles.heroTechSource}>Sharma.</span>
+                <TechText
+                  className={styles.heroTechCanvas}
+                  text="Sharma."
+                  fontWeight={600}
+                  fontSize={150}
+                  letterSpacing={-0.095}
+                  align="left"
+                  color="currentColor"
+                  accentColor="currentColor"
+                  reveal="letter"
+                  dashLength={4}
+                  dashGap={2}
+                  specks={15}
+                  intro="none"
+                  introDuration={2}
+                  clickKick
+                  guides={false}
+                />
+              </span>
+            </h1>
             <p className={styles.roleLine}>Full Stack Developer <span>+</span> UI/UX Designer</p>
             <p className={styles.heroDescription}>I build end-to-end web products and bring generative AI into the experience — from the first interface to the systems behind it.</p>
             <div className={styles.heroActions}>

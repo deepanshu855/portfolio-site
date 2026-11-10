@@ -157,10 +157,15 @@
 .eyebrow { display: flex; align-items: center; gap: 9px; margin: 0 0 41px; color: #b9c5c2; font-size: 9px; letter-spacing: .11em; }
 .liveDot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 12px rgba(136,240,220,.8); }
 .heroIndex { margin-left: auto; color: #697573; font-size: 8px; }
-.heroKicker { margin: 0 0 15px; color: var(--accent); font-size: 9px; letter-spacing: .13em; }
+.heroKicker { margin: 0 0 27px; color: var(--accent); font-size: 9px; letter-spacing: .13em; }
 .hero h1 { margin: 0; color: var(--text); font-family: $font-display; font-size: clamp(74px, 9.3vw, 140px); font-weight: 500; letter-spacing: -.095em; line-height: .78; }
 .hero h1 em, .sectionHeading h2 em, .contactSection h2 em { color: #8ea2a0; font-weight: 400; }
 .hero h1 em { font-style: normal; }
+.heroTechLine { position: relative; display: block; width: 100%; height: .78em; }
+.heroTechSource { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+.heroTechMuted { color: #8ea2a0; font-weight: 400; }
+.heroTechCanvas { position: absolute; top: -.36em; left: 0; width: 100%; height: 1.5em; touch-action: pan-y; user-select: none; }
+.heroTechCanvas canvas { display: block; width: 100%; height: 100%; }
 .heroPeriod { color: var(--accent); }
 .roleLine { margin: 31px 0 13px; color: #d1dcda; font-size: clamp(14px, 1.45vw, 19px); letter-spacing: -.035em; }
 .roleLine span { margin: 0 6px; color: var(--accent); }
@@ -472,7 +477,7 @@
   .hero::after { top: 31%; left: 30%; width: 74%; height: 42%; opacity: .48; }
   .heroCopy { padding: 0; }
   .eyebrow { margin-bottom: 25px; font-size: 7px; }
-  .heroKicker { margin-bottom: 12px; font-size: 8px; }
+  .heroKicker { margin-bottom: 22px; font-size: 8px; }
   .hero h1 { font-size: clamp(76px,18vw,124px); }
   .roleLine { margin-top: 23px; font-size: 14px; }
   .heroDescription { max-width: 420px; font-size: 12px; }
@@ -726,6 +731,7 @@
 /* Light theme receives explicit dark text on light surfaces. */
 .lightTheme .hero h1 em, .lightTheme .sectionHeading h2 em,
 .lightTheme .contactSection h2 em { color: #43544e; }
+.lightTheme .heroTechMuted { color: #43544e; }
 .lightTheme .heroVisual {
   background: radial-gradient(ellipse at 61% 45%, rgba(8,126,115,.11), transparent 58%);
 }
