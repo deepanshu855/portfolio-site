@@ -9,7 +9,7 @@ export type Project = {
   solution: string;
   detail: string;
   stack: string[];
-  kind: "builder" | "chat" | "music" | "commerce" | "food" | "community";
+  kind: "builder" | "chat" | "music" | "commerce" | "food" | "community" | "network";
   accent: string;
   availableLinks?: { label: string; href: string }[];
 };
@@ -82,19 +82,19 @@ export const projects: Project[] = [
     accent: "#f7d46f",
   },
   {
-    id: "alumni",
+    id: "knit",
     number: "05",
-    name: "University Alumni Website",
-    category: "Full-stack · UI/UX",
-    image: "/projects/alumni.png",
-    summary: "A college-alumni networking portal, from Figma prototypes through full-stack development.",
-    problem: "College alumni need a dedicated place to stay connected and network with their university community.",
-    solution: "A networking portal whose UI/UX design and full-stack development were both led by Deepanshu.",
-    detail: "A dedicated networking portal for college alumni. Deepanshu led the UI/UX design, prototyping in Figma, and the full-stack development of the community platform.",
-    stack: ["HTML", "CSS", "Tailwind CSS", "JavaScript", "Figma", "UI/UX"],
-    availableLinks: [{ label: "Live", href: "https://frontend-alumni.vercel.app/" }],
-    kind: "community",
-    accent: "#d5a5ff",
+    name: "K.N.I.T",
+    category: "Distributed Systems · MERN",
+    image: "",
+    summary: "A LAN-only inference engine that distributes LLM layers across consumer devices and recovers when a worker drops.",
+    problem: "Large language models can exceed the memory and compute capacity of a single consumer device.",
+    solution: "Knit coordinates a temporary cluster of local devices, assigns each worker a layer range, and re-stitches the pipeline when node health changes.",
+    detail: "Deepanshu is building the Node.js/Express control plane and React/Tailwind interface with Krishna. The master node tracks workers through in-memory registration and heartbeats, recalculates layer assignments after failures, and streams generated output to the UI. Tensor processing remains in the separate Python data plane; the project has no cloud routing or persistent database.",
+    stack: ["React", "Tailwind CSS", "Node.js", "Express.js", "Socket.IO", "In-memory orchestration"],
+    availableLinks: [{ label: "GitHub", href: "https://github.com/krishnasingh281/K.N.I.T" }],
+    kind: "network",
+    accent: "#88f0dc",
   },
 ];
 
@@ -144,7 +144,7 @@ export const resumeFacts = [
   "Deepanshu Sharma is a final-year B.Tech Computer Science and Engineering student at SRM University, Sonipat (2023–2027), with a 9.25/10 CGPA.",
   "He is a Full Stack Developer and UI/UX Designer seeking Full Stack and Generative AI internship and placement roles. His recent SGPAs are 9.68 and 9.72, and he was semester topper in each of those two semesters.",
   "His work includes Banão, an AI website builder using isolated Kubernetes sandbox pods; VeritasAI, a source-grounded AI chat application; and Moodify, an emotion-based music recommendation app.",
-  "He has also built Snitch, a multi-vendor e-commerce website, and a university alumni networking portal where he led Figma UI/UX and full-stack development.",
+  "He has also built Snitch, a multi-vendor e-commerce website, and is building K.N.I.T., a LAN-only distributed LLM inference engine with an in-memory Node.js orchestration control plane and React interface.",
   "His skills include React, Next.js, TypeScript, Node.js, Express, MongoDB, MySQL, LangChain, LangGraph, Mistral AI, RAG, AI agents, Docker, Kubernetes, AWS, and Figma.",
   "He was semester topper in the last two semesters, with SGPAs of 9.68 and 9.72. His Class XII score was 91.6% and Class X score was 91.2%.",
 ].join(" ");

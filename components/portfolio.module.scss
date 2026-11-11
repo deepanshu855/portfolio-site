@@ -176,9 +176,10 @@
 .primaryAction span, .textAction span { color: var(--accent); }
 .textAction { color: #aeb8b6; font-size: 10px; }
 .textAction span { margin-left: 6px; }
-.heroProof { position: relative; z-index: 3; display: flex; align-items: center; gap: 17px; margin-top: 53px; color: #7c8986; font: 8px $font-mono; letter-spacing: .08em; }
+.heroProof { position: relative; z-index: 3; display: flex; align-items: center; gap: 8px; margin-top: 53px; color: #7c8986; font: 8px $font-mono; letter-spacing: .08em; }
 .heroProof strong { margin-left: 6px; color: #dce5e3; font-size: 12px; font-weight: 500; }
 .heroProof i { width: 1px; height: 18px; background: var(--line); }
+.locationIcon { width: 18px; height: 18px; flex: none; color: var(--accent); }
 .heroVisual { position: relative; z-index: 1; min-height: 560px; height: 100%; overflow: hidden; }
 .visualGrid { position: absolute; inset: 7% 1% 2% 0; opacity: .23; background-image: linear-gradient(rgba(179,207,202,.12) 1px, transparent 1px), linear-gradient(90deg,rgba(179,207,202,.12) 1px,transparent 1px); background-size: 45px 45px; mask-image: radial-gradient(ellipse at center,black,transparent 74%); }
 .orbWrap { position: absolute; top: 5%; left: 8%; width: 100%; height: 88%; opacity: .83; }
@@ -257,8 +258,10 @@
 .cardLinks a:hover { border-color: var(--accent); color: var(--accent); }
 .openIcon { position: absolute; z-index: 4; top: 14px; right: 14px; display: grid; width: 32px; height: 32px; place-items: center; border: 1px solid rgba(223,237,236,.24); border-radius: 50%; background: rgba(8,10,11,.55); color: #e9f0ed; font-size: 13px; transition: background .2s, color .2s; }
 .projectCard:hover .openIcon { background: var(--project-accent); color: #07100f; }
-.projectFootnote { display: flex; gap: 8px; margin: 28px 0 0; color: #74817f; font: 9px $font-mono; }
-.projectFootnote span { color: var(--accent); }
+.projectFootnote { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 28px 0 0; color: #74817f; font: 9px $font-mono; }
+.projectFootnote > span:first-child { color: var(--accent); }
+.projectFootnote a { margin-left: auto; color: var(--text); text-decoration: none; white-space: nowrap; transition: color .2s; }
+.projectFootnote a:hover { color: var(--accent); }
 
 /* CSS-only product mockups keep each card visual while screenshots are pending. */
 .artwork { position: absolute; inset: 0; overflow: hidden; background: radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.04),transparent 70%); }
@@ -321,6 +324,18 @@
 .communityCards i:nth-child(2) { background: linear-gradient(145deg,#3d4954,#1e2229); }
 .communityCards i:nth-child(3) { background: linear-gradient(145deg,#654a60,#28202b); }
 .communityCards i:nth-child(4) { background: linear-gradient(145deg,#55534a,#262422); }
+.art_network { background: radial-gradient(ellipse at 54% 48%,rgba(93,218,190,.16),transparent 64%),#0e1515; }
+.networkHeading { display: grid; width: 43%; gap: 10px; }
+.networkHeading small, .networkHeading span, .networkWorkers span { color: #88f0dc; font: 7px $font-mono; letter-spacing: .1em; }
+.networkHeading strong { color: #e3efeb; font-family: $font-display; font-size: clamp(20px,3.5vw,37px); font-weight: 400; letter-spacing: -.06em; line-height: .95; }
+.networkHeading span { color: #82918d; }
+.networkDiagram { display: grid; width: 46%; gap: 10px; }
+.networkMaster { display: grid; justify-items: center; gap: 3px; width: 100%; padding: 11px; border: 1px solid rgba(136,240,220,.4); background: rgba(35,80,72,.34); color: #d7e9e3; font: 8px $font-mono; }
+.networkMaster span { color: #8eaaa2; font-size: 7px; }
+.networkWorkers { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 5px; }
+.networkWorkers i { display: grid; justify-items: center; gap: 7px; padding: 10px 4px; border: 1px solid rgba(223,237,236,.15); background: rgba(13,22,22,.84); font-style: normal; }
+.networkWorkers b { color: #e2f2ed; font: 12px $font-mono; }
+.networkWorkers span { color: #81938e; font-size: 5px; text-align: center; }
 
 .capabilitiesSection { position: relative; isolation: isolate; padding-top: 135px; }
 .capabilitiesSection::before {
@@ -867,6 +882,7 @@
   background: var(--surface);
 }
 .projectPreview img { object-fit: cover; object-position: top center; transition: transform .45s ease; }
+.projectPreview .artwork { border-radius: inherit; }
 .projectCard:hover .projectPreview img { transform: scale(1.035); }
 .projectMeta { min-width: 0; padding: 0; }
 .projectMeta h3 { margin: 0 0 5px; font-size: clamp(30px, 3.5vw, 44px); line-height: 1.05; }
@@ -1076,7 +1092,7 @@
 .site .heroDescription { font-size: 16px; line-height: 1.75; }
 .site .eyebrow, .site .heroKicker, .site .sectionLabel,
 .site .projectCategory, .site .stackHeading { font-size: 12px; }
-.site .heroProof { font-size: 11px; }
+.site .heroProof { gap: 8px; font-size: 14px; }
 .site .roleLine { font-size: clamp(17px, 1.55vw, 21px); }
 .site .primaryAction, .site .textAction { font-size: 13px; }
 .site .nav nav a, .site .navContact { font-size: 14px; }

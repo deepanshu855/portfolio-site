@@ -129,6 +129,13 @@ function ProjectArtwork({ kind }: { kind: Project["kind"] }) {
           <div className={styles.communityHead}><small>SRM · ALUMNI NETWORK</small><strong>Better things<br />happen together.</strong><span>Find your people. Share what you know.</span></div>
           <div className={styles.communityCards}><i /><i /><i /><i /></div>
         </>}
+        {kind === "network" && <>
+          <div className={styles.networkHeading}><small>LOCAL CLUSTER / LIVE</small><strong>One model.<br />Many machines.</strong><span>FAULT-TOLERANT INFERENCE</span></div>
+          <div className={styles.networkDiagram}>
+            <div className={styles.networkMaster}><b>MASTER</b><span>orchestrator</span></div>
+            <div className={styles.networkWorkers}><i><b>01</b><span>LAYERS 0–26</span></i><i><b>02</b><span>LAYERS 27–53</span></i><i><b>03</b><span>LAYERS 54–79</span></i></div>
+          </div>
+        </>}
       </div>
       <div className={styles.artGrain} />
     </div>
@@ -455,7 +462,7 @@ export default function Portfolio() {
               <a className={styles.primaryAction} href="#work">Explore selected work <span>↓</span></a>
               <a className={styles.textAction} href="/resume.pdf" download>Download résumé <span>↗</span></a>
             </div>
-            <div className={styles.heroProof}><span>CGPA <strong>9.25</strong> / 10</span><i /><span>SEMESTER TOPPER <strong>× 2</strong></span></div>
+            <div className={styles.heroProof}><svg className={styles.locationIcon} viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" fill="none" stroke="currentColor" strokeWidth="1.6"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg><span>DELHI NCR</span></div>
           </div>
           <div className={styles.heroVisual} aria-label="Decorative dithered image effect">
             <div className={styles.visualGrid} aria-hidden="true" />
@@ -507,7 +514,7 @@ export default function Portfolio() {
                   <div className={styles.projectCardFace}>
                     <div className={styles.projectCardBody}>
                       <div className={styles.projectPreview}>
-                        <Image src={project.image} alt={`${project.name} project screenshot`} fill sizes="(max-width: 760px) 100vw, 34vw" />
+                        {project.image ? <Image src={project.image} alt={`${project.name} project screenshot`} fill sizes="(max-width: 760px) 100vw, 34vw" /> : <ProjectArtwork kind={project.kind} />}
                       </div>
                       <div className={styles.projectMeta}>
                         <h3>{project.name}</h3>
@@ -517,7 +524,7 @@ export default function Portfolio() {
                         <div className={styles.stackList}>{project.stack.map((stack) => <span key={stack}>{stack}</span>)}</div>
                       </div>
                       <nav className={styles.cardLinks} aria-label={`${project.name} links`}>
-                        {project.availableLinks?.filter((item) => item.label.toLowerCase().includes("live")).map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">Live ↗</a>)}
+                        {project.availableLinks?.map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
                       </nav>
                     </div>
                     <button type="button" className={styles.projectDetailsButton} onClick={() => setSelectedProject(project)}>
@@ -528,7 +535,7 @@ export default function Portfolio() {
               </ScrollStackItem>
             ))}
           </ScrollStack>
-          <p className={styles.projectFootnote}><span>↗</span> Open a project for its full case study.</p>
+          <p className={styles.projectFootnote}><span>↗</span><span>Open a project for its full case study.</span><a href={links.github} target="_blank" rel="noreferrer">Explore more repositories @deepanshu855 ↗</a></p>
         </section>
 
         <section id="capabilities" className={styles.capabilitiesSection} aria-labelledby="capabilities-title">
@@ -650,7 +657,6 @@ export default function Portfolio() {
                 </div>
                 <section className={styles.modalStackSection}><h3>Tech stack</h3><div className={styles.modalStacks}>{selectedProject.stack.map((stack) => <span key={stack}>{stack}</span>)}</div></section>
                 <div className={styles.modalLinks}>
-                  <a href={links.github} target="_blank" rel="noreferrer">GitHub profile ↗</a>
                   {selectedProject.availableLinks?.map((item) => <a key={item.label} href={item.href} target="_blank" rel="noreferrer">{item.label} ↗</a>)}
                 </div>
                 {!selectedProject.availableLinks?.some((item) => item.label.toLowerCase().includes("live")) && <p className={styles.linksPending}>A live demo link is not available yet.</p>}
