@@ -487,8 +487,19 @@ export default function Portfolio() {
           <a className={styles.scrollCue} href="#work"><span /> SCROLL TO EXPLORE</a>
         </section>
 
-        <section className={styles.signalStrip} aria-label="Focus areas">
-          <span>FULL-STACK SYSTEMS</span><i>✳</i><span>GENERATIVE AI</span><i>✳</i><span>HUMAN-CENTERED DESIGN</span><i>✳</i><span>FULL-STACK SYSTEMS</span>
+        <section className={styles.techLogoStrip} aria-label="Technology logos">
+          <LogoLoop
+            logos={skillLogos}
+            speed={46}
+            direction="left"
+            logoHeight={34}
+            gap={40}
+            hoverSpeed={0}
+            scaleOnHover
+            labels="hover"
+            muted={0.18}
+            ariaLabel="Technology and tools"
+          />
         </section>
 
         <section id="work" className={styles.workSection} aria-labelledby="work-title">
@@ -547,20 +558,6 @@ export default function Portfolio() {
               <h3>{group.title}</h3>
               <div className={styles.skillTags}>{group.skills.map((skill) => <SkillIcon key={skill} skill={skill} />)}</div>
             </article>)}
-          </div>
-          <div className={styles.skillLogoLoop}>
-            <LogoLoop
-              logos={skillLogos}
-              speed={46}
-              direction="left"
-              logoHeight={34}
-              gap={40}
-              hoverSpeed={0}
-              scaleOnHover
-              labels="hover"
-              muted={0.18}
-              ariaLabel="Technology and tools from my skills"
-            />
           </div>
         </section>
 

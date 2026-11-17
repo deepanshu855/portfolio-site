@@ -21,7 +21,7 @@
   --accent: #161616;
   --accent-blue: #555555;
 }
-.lightTheme .nav, .lightTheme .signalStrip, .lightTheme .achievementRow { border-color: var(--line); }
+.lightTheme .nav, .lightTheme .achievementRow { border-color: var(--line); }
 .lightTheme .nav nav a, .lightTheme .navContact { color: var(--text); }
 .lightTheme .nav nav a span { color: var(--muted); }
 .lightTheme .eyebrow, .lightTheme .roleLine, .lightTheme .heroProof strong, .lightTheme .projectMeta h3, .lightTheme .skillCard h3, .lightTheme .eduDetails h3, .lightTheme .achievementRow strong { color: var(--text); }
@@ -34,7 +34,6 @@
 .lightTheme .projectMeta p, .lightTheme .skillCard p, .lightTheme .eduDetails p, .lightTheme .sectionAside, .lightTheme .achievementRow small { color: var(--muted); }
 .lightTheme .projectMeta > span, .lightTheme .projectFootnote, .lightTheme .footer > span { color: var(--muted); }
 .lightTheme .stackList span, .lightTheme .skillTags span, .lightTheme .modalStacks span { border-color: var(--line); background: #e8eeeb; color: #25332f; }
-.lightTheme .signalStrip { color: #53615c; }
 .lightTheme .eduIndex, .lightTheme .cgpa > span, .lightTheme .achievementRow > div > span { color: #52615c; }
 .lightTheme .cgpa strong { color: var(--text); }
 .lightTheme .contactSection { background: radial-gradient(ellipse at 50% 53%,rgba(8,126,115,.1),transparent 49%); }
@@ -196,8 +195,9 @@
 .scrollCue { position: absolute; bottom: 30px; left: 4.6%; display: flex; align-items: center; gap: 11px; color: #70807d; font-size: 8px; letter-spacing: .12em; }
 .scrollCue span { width: 27px; height: 1px; background: var(--accent); }
 
-.signalStrip { position: relative; z-index: 1; display: flex; min-height: 66px; align-items: center; justify-content: space-around; gap: 18px; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #99a6a3; font: 8px $font-mono; letter-spacing: .14em; white-space: nowrap; }
-.signalStrip i { color: var(--accent); font-size: 14px; font-style: normal; }
+.techLogoStrip { position: relative; z-index: 1; width: calc(100% - 96px); margin: 0 auto; overflow: hidden; border-block: 1px solid var(--line); color: var(--text); }
+.techLogoStrip [role="region"] { --logoloop-pad: 28px; }
+.techLogoStrip svg { display: block; width: 1em; height: 1em; }
 
 .workSection, .capabilitiesSection, .backgroundSection { width: min($max-width, calc(100% - 96px)); margin: 0 auto; padding: 137px 0 45px; scroll-margin-top: 40px; }
 .workSection { position: relative; isolation: isolate; }
@@ -507,8 +507,8 @@
   .orbFallback { top: 6%; right: 4%; width: 78%; }
   .coordinate, .visualCaption, .visualCross { display: none; }
   .scrollCue { display: none; }
-  .signalStrip { min-height: 52px; justify-content: flex-start; gap: 18px; padding: 0 20px; font-size: 7px; }
-  .signalStrip span:last-child { display: none; }
+  .techLogoStrip { width: calc(100% - 38px); }
+  .techLogoStrip [role="region"] { --logoloop-pad: 20px; }
   .workSection, .capabilitiesSection, .backgroundSection { width: calc(100% - 38px); padding-top: 88px; }
   .sectionHeading { display: block; margin-bottom: 30px; }
   .sectionHeading h2 { font-size: clamp(52px,13vw,76px); }
@@ -646,7 +646,7 @@
 }
 .heroDescription, .projectNarrative p, .modalContent > p, .modalNarrative p { color: var(--text-soft); }
 .eyebrow, .heroKicker, .sectionLabel, .sectionAside, .heroDescription,
-.roleLine, .heroProof, .textAction, .signalStrip, .projectMeta > span,
+.roleLine, .heroProof, .textAction, .projectMeta > span,
 .projectNarrative p, .stackHeading, .stackList span, .cardLinks a,
 .skillIndex, .skillCard p, .skillTags, .eduIndex, .eduDetails p,
 .achievementRow, .contactEmail, .contactLinks a, .footer > span,
@@ -662,7 +662,7 @@
   line-height: 1.7;
 }
 .cardLinks a, .stackList span, .modalStacks span, .skillTags span,
-.textAction, .signalStrip, .contactLinks a { font-size: 12px; }
+.textAction, .contactLinks a { font-size: 12px; }
 
 /* Project work reads as six distinct editorial case studies. */
 .projectGrid { display: grid; grid-template-columns: 1fr; gap: 22px; }
@@ -744,9 +744,6 @@
 .skillCard { background: var(--surface); }
 .skillCard h3 { font-size: 30px; }
 .skillCard p { max-width: 440px; }
-.skillLogoLoop { margin: 64px 0 26px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--text); }
-.skillLogoLoop svg { display: block; width: 1em; height: 1em; }
-.skillLogoLoop [role="region"] { --logoloop-pad: 22px; }
 
 /* Light theme receives explicit dark text on light surfaces. */
 .lightTheme .hero h1 em, .lightTheme .sectionHeading h2 em,
@@ -824,8 +821,6 @@
   .cardLinks a, .stackList span { font-size: 12px; }
   .skillTags span { font-size: 13px; }
   .skillCard p { font-size: 14px; }
-  .skillLogoLoop { margin: 42px 0 16px; }
-  .skillLogoLoop [role="region"] { --logoloop-pad: 18px; }
   .skillItem { min-height: 36px; gap: 7px; padding-right: 8px; font-size: 12px; }
   .skillIcon { width: 23px; height: 23px; flex-basis: 23px; }
   .heroDescription { font-size: 14px; }
@@ -1075,14 +1070,12 @@
 .site .eduIndex, .site .eduDetails > span:first-child, .site .cgpa > span,
 .site .cgpa small, .site .achievementRow > div > span, .site .achievementRow small,
 .site .footer > span, .site .scrollCue, .site .coordinate, .site .visualCaption > span,
-.site .signalStrip { color: var(--text-dim); }
 .site .heroDescription, .site .projectDescription, .site .projectNarrative p,
 .site .skillCard p, .site .eduDetails p, .site .modalContent > p,
 .site .modalNarrative p { color: var(--text-soft); }
 .site .contactEmail, .site .contactLinks a, .site .cardLinks a,
 .site .projectMeta h3, .site .skillCard h3, .site .eduDetails h3,
 .site .achievementRow strong, .site .modalContent h2 { color: var(--text); }
-.site .signalStrip { border-color: var(--line); }
 .site .contactLinks a, .site .cardLinks a { border-color: var(--line); }
 .site .stackList span, .site .modalStacks span {
   border-color: var(--line);
