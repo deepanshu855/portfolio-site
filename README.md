@@ -2,6 +2,8 @@
 
 A single-page portfolio for Full Stack and Generative AI internship and placement opportunities.
 
+**Live site:** [portfolio-siteportfolio.vercel.app](https://portfolio-siteportfolio.vercel.app/)
+
 ## Run locally
 
 Requires Node.js 20.9 or newer.
@@ -23,6 +25,7 @@ Before deployment, set `NEXT_PUBLIC_SITE_URL` to the final public origin. The r√
 ## Implementation notes
 
 - Next.js App Router, strict TypeScript, Sass modules, semantic server-rendered content, JSON-LD, Open Graph and Twitter metadata.
+- Social previews use `public/images/portfolio-preview.png` for Open Graph and Twitter cards.
 - The navbar scrolls smoothly between page sections. Its theme control switches between dark and light palettes.
 - Projects use alternating case-study rows with the problem, solution, available stack, and links visible up front. Skill groups pair each technology with a high-contrast icon mark. Project detail modals provide a fuller implementation summary.
 - Dark and light themes use separate high-contrast text and chip colors; body and technology labels have been enlarged for legibility.

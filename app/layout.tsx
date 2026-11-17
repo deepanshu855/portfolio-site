@@ -23,11 +23,13 @@ const person = {
   },
 };
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-siteportfolio.vercel.app";
+
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Deepanshu Sharma — Full Stack Developer & GenAI Builder";
   const description = "Final-year B.Tech CSE student at SRM University building full-stack products, generative AI applications, and thoughtful user experiences.";
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+    metadataBase: new URL(siteUrl),
     title,
     description,
     applicationName: "Deepanshu Sharma Portfolio",
@@ -37,13 +39,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       siteName: "Deepanshu Sharma",
-      images: [{ url: "/images/deepanshu-profile.jpg", width: 720, height: 1584, alt: "Deepanshu Sharma" }],
+      images: [{ url: "/images/portfolio-preview.png", width: 1200, height: 630, alt: "Deepanshu Sharma portfolio preview" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/deepanshu-profile.jpg"],
+      images: ["/images/portfolio-preview.png"],
     },
     robots: { index: true, follow: true },
   };
@@ -53,8 +55,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const profilePage = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "ProfilePage", name: "Deepanshu Sharma — Portfolio", mainEntity: { "@id": `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/#person` } },
-      { ...person, "@id": `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/#person`, hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "Bachelor of Technology", educationalLevel: "Undergraduate", recognizedBy: { "@type": "CollegeOrUniversity", name: "SRM University, Sonipat" }, description: "B.Tech in Computer Science and Engineering; CGPA 9.25/10" } },
+      { "@type": "ProfilePage", name: "Deepanshu Sharma — Portfolio", mainEntity: { "@id": `${siteUrl}/#person` } },
+      { ...person, "@id": `${siteUrl}/#person`, hasCredential: { "@type": "EducationalOccupationalCredential", credentialCategory: "Bachelor of Technology", educationalLevel: "Undergraduate", recognizedBy: { "@type": "CollegeOrUniversity", name: "SRM University, Sonipat" }, description: "B.Tech in Computer Science and Engineering; CGPA 9.25/10" } },
     ],
   };
 
